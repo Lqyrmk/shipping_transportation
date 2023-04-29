@@ -5,6 +5,25 @@
 
 <mapper namespace="com.lqyrmk.transportation.mapper.OrderDetailsMapper">
 
+    <resultMap id="orderDetailsByStepResultMap" type="OrderDetails">
+        <id column="id" property="id"></id>
+        <result column="goods_num" property="goodsNum"></result>
+        <!--处理order字段-->
+<!--        <association property="order" fetchType="eager"-->
+<!--                     select="com.lqyrmk.transportation.mapper.OrderMapper.getOrderById"-->
+<!--                     column="order_id"></association>-->
+        <!--处理goods字段-->
+        <association property="goods" fetchType="eager"
+                     select="com.lqyrmk.transportation.mapper.GoodsMapper.getGoodsById"
+                     column="goods_id"></association>
+    </resultMap>
+
+    <!--List<OrderDetails> getOrderDetailsByOrderId(@Param("orderId") Integer orderId);-->
+    <select id="getOrderDetailsByOrderId" resultMap="orderDetailsByStepResultMap">
+        select * from order_details where order_id = #{orderId}
+    </select>
+
+
     <!--void insertOrderDetails(@Param("order") Order order, @Param("goodsList") GoodsList goodsList);-->
     <insert id="insertOrderDetails">
         insert into order_details (`order_id`, `goods_id`, `goods_num`)

@@ -25,7 +25,8 @@ public class ShipperServiceImpl implements ShipperService {
 
     @Override
     public Shipper getShipperById(Integer shipperId) {
-        Shipper shipper = shipperMapper.getShipperById(shipperId);
+//        Shipper shipper = shipperMapper.getShipperById(shipperId);
+        Shipper shipper = shipperMapper.getShipperAndOrderByShipperIdByStepOne(shipperId);
         return shipper;
     }
 }

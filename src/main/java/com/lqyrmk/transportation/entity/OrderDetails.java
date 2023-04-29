@@ -1,5 +1,6 @@
 package com.lqyrmk.transportation.entity;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import lombok.Data;
 
 /**
@@ -13,8 +14,9 @@ public class OrderDetails {
     private Integer id;
 
     private Integer orderId;
+//    private Order order;
 
-    private Integer goodsId;
+    private Goods goods;
 
     private Integer goodsNum;
 

@@ -34,7 +34,7 @@ public interface GoodsMapper {
     List<Goods> getAllGoodsByInfo(Map<String, Object> infoMap);
 
     /**
-     * @description: 根据id更新货物信息
+     * @description: 根据货物id查询货物信息
      * @author: YuanmingLiu
      * @date: 2023/4/29 2:11
      * @param: [goods_id]

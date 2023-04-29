@@ -2,6 +2,8 @@ package com.lqyrmk.transportation.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description
  * @Author YuanmingLiu
@@ -21,5 +23,7 @@ public class Shipper {
     private String email;
 
     private String phone;
+
+    private List<Order> orders;
 
 }

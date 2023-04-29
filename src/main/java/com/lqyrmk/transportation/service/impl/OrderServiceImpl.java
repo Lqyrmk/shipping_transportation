@@ -32,19 +32,25 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAllOrders() {
         List<Order> orders = orderMapper.getAllOrders();
+//        List<Order> orders = orderMapper.getAllOrdersAndShipperAndCarrierByStepOne();
         return orders;
     }
 
     @Override
     public Order getOrderById(Integer orderId) {
-        Order order = orderMapper.getOrderById(orderId);
+//        Order order = orderMapper.getOrderById(orderId);
+        Order order = orderMapper.getOrderAndShipperAndCarrierByOrderIdByStepOne(orderId);
+        System.out.println("order = " + order);
         return order;
     }
 
     @Override
     public void saveOrder(Order order) {
+
+        System.out.println("order1 = " + order);
         // 添加订单记录，获得自增id
         orderMapper.insertOrder(order);
+        System.out.println("order2 = " + order);
 
         double totalPrice = 0;
         double totalWeight = 0;

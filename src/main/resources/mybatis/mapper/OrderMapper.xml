@@ -5,8 +5,30 @@
 
 <mapper namespace="com.lqyrmk.transportation.mapper.OrderMapper">
 
+    <resultMap id="orderAndShipperAndCarrierByStepResultMap" type="Order">
+        <id column="order_id" property="orderId"></id>
+        <result column="shipment_place" property="shipmentPlace"></result>
+        <result column="addressee" property="addressee"></result>
+        <result column="destination" property="destination"></result>
+        <result column="total_price" property="totalPrice"></result>
+        <result column="total_weight" property="totalWeight"></result>
+        <!--处理shipper字段-->
+        <association property="shipper" fetchType="eager"
+                     select="com.lqyrmk.transportation.mapper.ShipperMapper.getOrderAndShipperAndCarrierByOrderIdByStepTwo"
+                     column="shipper_id"></association>
+        <!--处理carrier字段-->
+        <association property="carrier" fetchType="eager"
+                     select="com.lqyrmk.transportation.mapper.CarrierMapper.getOrderAndShipperAndCarrierByOrderIdByStepTwo"
+                     column="carrier_id"></association>
+        <!--处理orderDetailsList字段-->
+        <collection property="orderDetailsList" fetchType="eager"
+                    select="com.lqyrmk.transportation.mapper.OrderDetailsMapper.getOrderDetailsByOrderId"
+                    column="order_id"></collection>
+    </resultMap>
+
     <!--List<Order> getAllOrders();-->
-    <select id="getAllOrders" resultType="Order">
+    <select id="getAllOrders"
+            resultMap="orderAndShipperAndCarrierByStepResultMap">
         select * from `order`
     </select>
 
@@ -15,10 +37,22 @@
         select * from `order` where order_id = #{orderId}
     </select>
 
+    <!--Order getOrderAndShipperAndCarrierByOrderIdByStepOne(@Param("orderId") Integer orderId);-->
+    <select id="getOrderAndShipperAndCarrierByOrderIdByStepOne"
+            resultMap="orderAndShipperAndCarrierByStepResultMap">
+        select * from `order` where order_id = #{orderId}
+    </select>
+
+    <!--List<Order> getShipperAndOrderByShipperIdByStepTwo(@Param("shipperId") Integer shipperId);-->
+    <select id="getShipperAndOrderByShipperIdByStepTwo" resultType="Order">
+        select * from `order` where shipper_id = #{shipperId}
+    </select>
+
+
     <!--void insertOrder(Order order);-->
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="orderId">
         insert into `order`(`order_id`, `shipper_id`, `carrier_id`, `shipment_place`, `addressee`, `destination`, `total_weight`, `total_price`)
-        values (#{orderId}, #{shipperId}, #{carrierId}, #{shipmentPlace}, #{addressee}, #{destination}, #{totalWeight}, #{totalPrice})
+        values (#{orderId}, #{shipper.shipperId}, #{carrier.carrierId}, #{shipmentPlace}, #{addressee}, #{destination}, #{totalWeight}, #{totalPrice})
     </insert>
 
     <!--void updateOrder(Order order);-->

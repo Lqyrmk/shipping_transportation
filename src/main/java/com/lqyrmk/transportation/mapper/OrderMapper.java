@@ -1,6 +1,7 @@
 package com.lqyrmk.transportation.mapper;
 
 import com.lqyrmk.transportation.entity.Order;
+import com.lqyrmk.transportation.entity.Shipper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,13 +25,31 @@ public interface OrderMapper {
     List<Order> getAllOrders();
 
     /**
-     * @description: 根据id查询订单信息
+     * @description: 根据订单id查询订单信息
      * @author: YuanmingLiu
      * @date: 2023/4/29 17:40
      * @param: [orderId]
      * @return: com.lqyrmk.transportation.entity.Order
      **/
     Order getOrderById(@Param("orderId") Integer orderId);
+
+    /**
+     * @description: 根据订单id查询订单详细信息 第一步
+     * @author: YuanmingLiu
+     * @date: 2023/4/29 21:35
+     * @param: [orderId]
+     * @return: com.lqyrmk.transportation.entity.Order
+     **/
+    Order getOrderAndShipperAndCarrierByOrderIdByStepOne(@Param("orderId") Integer orderId);
+
+    /**
+     * @description: 根据托运人id查询托运人信息 第二步（order）
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 0:02
+     * @param: [shipperId]
+     * @return: java.util.List<com.lqyrmk.transportation.entity.Order>
+     **/
+    List<Order> getShipperAndOrderByShipperIdByStepTwo(@Param("shipperId") Integer shipperId);
 
     /**
      * @description: 添加订单信息
@@ -67,4 +86,5 @@ public interface OrderMapper {
      * @return: void
      **/
     void updateOrderPriceAndWeight(Order order);
+
 }

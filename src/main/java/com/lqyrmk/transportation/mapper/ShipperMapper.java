@@ -30,4 +30,23 @@ public interface ShipperMapper {
      * @return: com.lqyrmk.transportation.entity.Shipper
      **/
     Shipper getShipperById(@Param("shipperId") Integer shipperId);
+
+    /**
+     * @description: 根据托运人id查询托运人信息 第一步
+     * @author: YuanmingLiu
+     * @date: 2023/4/29 23:51
+     * @param: [shipperId]
+     * @return: com.lqyrmk.transportation.entity.Shipper
+     **/
+    Shipper getShipperAndOrderByShipperIdByStepOne(@Param("shipperId") Integer shipperId);
+
+    /**
+     * @description: 根据订单id查询订单详细信息 第二步（Shipper）
+     * @author: YuanmingLiu
+     * @date: 2023/4/29 21:46
+     * @param: [shipperId]
+     * @return: com.lqyrmk.transportation.entity.Shipper
+     **/
+    Shipper getOrderAndShipperAndCarrierByOrderIdByStepTwo(@Param("shipperId") Integer shipperId);
+
 }

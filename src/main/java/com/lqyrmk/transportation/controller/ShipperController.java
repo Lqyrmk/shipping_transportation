@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -98,6 +100,13 @@ public class ShipperController {
 //            return "login";
 //        }
         return "index";
+    }
+
+    @ResponseBody
+    @GetMapping("/testShipper")
+    public Shipper testShipper(@RequestParam("shipperId") Integer shipperId) {
+        Shipper shipper = shipperService.getShipperById(shipperId);
+        return shipper;
     }
 
 }

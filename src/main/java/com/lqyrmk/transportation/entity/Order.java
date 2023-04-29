@@ -2,6 +2,8 @@ package com.lqyrmk.transportation.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description
  * @Author YuanmingLiu
@@ -13,11 +15,14 @@ public class Order {
     // 订单编号
     private Integer orderId;
 
-    // 托运人id
-    private Integer shipperId;
+    // 订单信息
+    private List<OrderDetails> orderDetailsList;
 
-    // 承运商id
-    private Integer carrierId;
+    // 托运人
+    private Shipper shipper;
+
+    // 承运商
+    private Carrier carrier;
 
     // 收货人
     private String addressee;

@@ -15,4 +15,28 @@
         select * from shipper where shipper_id = #{shipperId}
     </select>
 
+    <resultMap id="shipperAndOrderResultMap" type="Shipper">
+        <id column="shipper_id" property="shipperId"></id>
+        <result column="shipper_name" property="shipperName"></result>
+        <result column="password" property="password"></result>
+        <result column="gender" property="gender"></result>
+        <result column="email" property="email"></result>
+        <result column="phone" property="phone"></result>
+        <!--处理orders字段-->
+        <collection property="orders"
+                    select="com.lqyrmk.transportation.mapper.OrderMapper.getShipperAndOrderByShipperIdByStepTwo"
+                    column="shipper_id"></collection>
+    </resultMap>
+
+    <!--Shipper getShipperAndOrderByShipperIdByStepOne(@Param("shipperId") Integer shipperId);-->
+    <select id="getShipperAndOrderByShipperIdByStepOne"
+            resultMap="shipperAndOrderResultMap">
+        select * from shipper where shipper_id = #{shipperId}
+    </select>
+
+    <!--Shipper getOrderAndShipperAndCarrierByOrderIdByStepTwo(@Param("shipperId") Integer shipperId);-->
+    <select id="getOrderAndShipperAndCarrierByOrderIdByStepTwo" resultType="Shipper">
+        select * from shipper where shipper_id = #{shipperId}
+    </select>
+
 </mapper>

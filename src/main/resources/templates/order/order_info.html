@@ -125,8 +125,8 @@
                             <tbody>
                             <tr th:each="order : ${allOrders}">
                                 <td th:text="${order.orderId}"></td>
-                                <td th:text="${order.shipperId}"></td>
-                                <td th:text="${order.carrierId}"></td>
+                                <td th:text="${order.shipper.shipperName}"></td>
+                                <td th:text="${order.carrier.carrierName}"></td>
                                 <td th:text="${order.addressee}"></td>
                                 <td th:text="${order.shipmentPlace}"></td>
                                 <td th:text="${order.destination}"></td>
