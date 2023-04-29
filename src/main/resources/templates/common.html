@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-head">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/xadmin.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/xadmin.js"></script>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<header id="common-header">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand hidden-sm" style="font-size: 1.5em" th:href="@{/index.html}"
+                   onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">物流货运平台</a>
+            </div>
+            <div class="navbar-collapse collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/getGoodsInfo}" target="_self"
+                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">货物管理</a></li>
+                    <li><a th:href="@{/getOrderInfo}" target="_self"
+                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">物流订单</a></li>
+                    <li><a th:href="@{/getGoodsListInfo}" target="_self"
+                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">待运输货物清单</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-sm">
+                    <li><a href="../aboutUs.html" target="_self"
+                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+</body>
+</html>

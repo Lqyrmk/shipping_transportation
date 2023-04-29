@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>数字物流货运平台</title>
+
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/"> -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-shipper-select: none;
+            -moz-shipper-select: none;
+            -ms-shipper-select: none;
+            shipper-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <style>
+        #a {
+            /* background-color: rgb(105, 184, 217); */
+            background-image: url("images/01.png");
+            background-size: 100% 100%;
+            /* background-repeat: no-repeat; */
+            background-attachment: fixed;
+            /* position: absolute; */
+            padding: 0px;
+            width: 100%;
+            height: 15%;
+            top: 0;
+            left: 0;
+        }
+    </style>
+
+    <link href="css/album.css" rel="stylesheet">
+
+</head>
+
+<body style="background:url(images/bg.jpg);background-size: cover;backdrop-filter: blur(5px);position: fixed;height: 100%;">
+<header th:include="common :: #common-header"></header>
+
+<!--<header>-->
+<!--    <div class="navbar navbar-inverse navbar-fixed-top">-->
+        <!--        <div class="container">-->
+<!--            <div class="navbar-header">-->
+<!--                <a class="navbar-brand hidden-sm" style="font-size: 1.5em" th:href="@{/index.html}"-->
+<!--                   onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">物流货运平台</a>-->
+<!--            </div>-->
+<!--            <div class="navbar-collapse collapse" role="navigation">-->
+<!--                <ul class="nav navbar-nav">-->
+<!--                    <li><a th:href="@{/getGoodsInfo}" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">货物管理</a></li>-->
+<!--                    <li><a th:href="@{/getOrderInfo}" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">物流订单</a></li>-->
+<!--                    <li><a href="../whiteList.html" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">管理白名单</a></li>-->
+<!--                    <li><a href="../shipper.html" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v5doc'])">用户中心</a></li>-->
+<!--                </ul>-->
+<!--                <ul class="nav navbar-nav navbar-right hidden-sm">-->
+<!--                    <li><a href="../aboutUs.html" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</header>-->
+
+<main role="main">
+
+    <section class="jumbotron text-center" style="background:rgba(255, 255, 255, 0);">
+        <div class="container">
+            <h1 style="width:380px;font-weight: 700;color: aliceblue;">物流货运平台</h1>
+            <p class="lead text-muted" style="color:rgb(250, 250, 250);font-weight: 400;">数字化、智能化、透明化</p>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container" style="width: 100%;">
+            <div class="col-md-3">
+                <div class="card mb-3 shadow-sm">
+                    <div class="aaa" style="border-radius: 10px">
+                        <img class="bd-placeholder-img card-img-top" height="300" SRC="images/1.jpg"
+                             preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                             aria-label="Placeholder: Thumbnail">
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                        </img>
+                        <div class="text">
+                            <h2 style="color: rgb(251, 251, 251);"><span>配载调度</span></h2><br>
+                            <p style="color: rgb(251, 251, 251);">结合客户订单的货量、时间要求及车辆的载配能力与成本，<br><br>
+                                通过地图技术生成智能配载调度方案，用最合理的成本满足客户服务要求，<br><br>
+                                提高企业运输能力。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-3 shadow-sm">
+                    <div class="aaa" style="border-radius: 10px">
+                        <img class="bd-placeholder-img card-img-top" height="300" SRC="images/2.jpg"
+                             preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                             aria-label="Placeholder: Thumbnail"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                        <text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
+                        </svg>
+                        <div class="text">
+                            <h2 style="color: rgb(251, 251, 251);"><span>业务跟踪</span></h2>
+                            <p style="color: rgb(251, 251, 251);">提供订单配送的时效预估，实时跟踪订单的配送全过程，实现配送全程透明可视化。<br><br>
+                                运输过程全程透明可见，通过短信或网页提供实时订单状态查询。<br><br>
+                                动态预测订单延误等异常情况，为保障服务交付提供数据支持！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-3 shadow-sm">
+                    <div class="aaa" style="border-radius: 10px">
+                        <img class="bd-placeholder-img card-img-top" height="300" SRC="images/3.jpg"
+                             preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                             aria-label="Placeholder: Thumbnail"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                        <text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
+                        </svg>
+                        <div class="text">
+                            <h2 style="color: rgb(251, 251, 251);"><span>车辆监控</span></h2>
+                            <p style="color: rgb(251, 251, 251);">将生成的配载调度方案分配给车辆，通过APP实时监控车辆与司机的位置与服务状态。<br><br>
+                                支持通过手机或车载硬件进行车辆监控管理，实时了解车辆位置与服务状态<br><br>
+                                支持温度、载重、停车时间等多维度数据的查询及实时预警</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-3 shadow-sm">
+                    <div class="aaa" style="border-radius: 10px">
+                        <img class="bd-placeholder-img card-img-top" height="300" SRC="images/4.jpg"
+                             preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                             aria-label="Placeholder: Thumbnail"><title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                        </img>
+                        <div class="text">
+                            <h2 style="color: rgb(251, 251, 251);"><span>可视化报表</span></h2><br>
+                            <p style="color: rgb(251, 251, 251);">连接每一台车辆、每一次配送过程，数字化展现企业的运营情况。<br><br>
+                                从粗放式的结果管理提升到数据化的过程管理，为司机结算及企业降本增效提供数据支持。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+</main>
+
+<footer class="text-muted" style="padding-bottom:5px ;">
+    <div class="container">
+        <hr></hr>
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>关于我们：<a href="https://getbootstrap.com/">团队介绍</a> 寻求帮助： <a href="../getting-started/introduction/">帮助文档</a>.
+        </p>
+    </div>
+</footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+</html>

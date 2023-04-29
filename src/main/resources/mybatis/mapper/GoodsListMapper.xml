@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lqyrmk.transportation.mapper.GoodsListMapper">
+
+    <!--List<GoodsList> getGoodsList();-->
+    <select id="getGoodsList" resultType="GoodsList">
+        select * from goods_list
+    </select>
+
+    <!--GoodsList getGoodsListByGoodsId(@Param("goodsId") Integer goodsId);-->
+    <select id="getGoodsListByGoodsId" resultType="GoodsList">
+        select * from goods_list where goods_id = #{goodsId}
+    </select>
+
+    <!--void addGoodsToList(Goods goods);-->
+    <insert id="addGoodsToList">
+        insert into goods_list(`goods_id`, `goods_name`, `price`, `weight`, `num`)
+        values(#{goodsId}, #{goodsName}, #{price}, #{weight}, 1)
+    </insert>
+
+    <!--void updateGoodsNumber(@Param("goodsId") Integer goodsId);-->
+    <update id="updateGoodsNumber">
+        update goods_list
+        set num = num + 1
+        where `goods_id`=#{goodsId}
+    </update>
+
+    <!--void clearGoodsList();-->
+    <delete id="clearGoodsList">
+        delete from goods_list
+    </delete>
+
+</mapper>

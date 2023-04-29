@@ -1,0 +1,30 @@
+package com.lqyrmk.transportation.service;
+
+import com.lqyrmk.transportation.entity.Shipper;
+
+/**
+ * @Description
+ * @Author YuanmingLiu
+ * @Date 2023/4/28 1:11
+ */
+public interface ShipperService {
+
+    /**
+     * @description: 用户登录
+     * @author: YuanmingLiu
+     * @date: 2023/4/28 1:16
+     * @param: [shipperName, password]
+     * @return: com.lqyrmk.transportation.entity.Shipper
+     **/
+    Shipper login(String shipperName, String password);
+
+    /**
+     * @description: 根据id获取托运人信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/29 21:06
+     * @param: [shipperId]
+     * @return: com.lqyrmk.transportation.entity.Shipper
+     **/
+    Shipper getShipperById(Integer shipperId);
+
+}

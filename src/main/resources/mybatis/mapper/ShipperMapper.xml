@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lqyrmk.transportation.mapper.ShipperMapper">
+
+    <!--Shipper getShipperByShippernameAndPassword(@Param("shipperName") String shipperName, @Param("password") String password);-->
+    <select id="getShipperByShippernameAndPassword" resultType="Shipper">
+        select * from shipper where shipper_name = #{shipperName} and password = #{password}
+    </select>
+
+    <!--Shipper getShipperById(@Param("shipperId") Integer shipperId);-->
+    <select id="getShipperById" resultType="Shipper">
+        select * from shipper where shipper_id = #{shipperId}
+    </select>
+
+</mapper>

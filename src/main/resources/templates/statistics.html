@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>物流货运平台</title>
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-shipper-select: none;
+        -moz-shipper-select: none;
+        -ms-shipper-select: none;
+        shipper-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="album.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+  </head>
+  <body style="top: 50px;background:url(images/bg.jpg);background-size: cover;backdrop-filter: blur(5px);">
+
+    <header>
+      <div class="navbar navbar-inverse navbar-fixed-top" >
+        <div class="container">
+          <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand hidden-sm" style="font-size: 1.5em" href="index.html" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">物流货运平台</a>
+            </div>
+            <div class="navbar-collapse collapse" role="navigation">
+              <ul class="nav navbar-nav">
+                <li><a href="goods/goods_info.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">物流记录</a></li>
+                <li><a href="statistics.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">数据统计</a></li>
+                <li><a href="whiteList.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">管理白名单</a></li>
+                <li><a href="shipper.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v5doc'])">用户中心</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right hidden-sm">
+                <li><a href="aboutUs.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      </header>
+
+
+<div class="layui-fluid" style="padding-top: 60px;">
+        <div class="layui-row layui-col-space15">
+              <div class="layui-col-md12">
+                <div class="layui-card">
+                      <div class="layui-card-body ">
+                          <div id="main" class="col-md-6" style="width: 600px;height: 600px; padding: 0 100px;border-radius: 15px"></div>
+                          <div id="main2" class="col-md-6" style="width: 800px;height:600px; padding: 0 100px;border-radius: 15px"></div>
+                      </div>
+                  </div>
+              </div>
+        </div>
+</div>
+        <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+        <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/extension/bmap.min.js"></script>
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        option = {
+            backgroundColor: '#47617b',
+
+            title: {
+                text: '入侵记录比例分布饼状图',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 200,
+                max: 800,
+                inRange: {
+                    colorLightness: [0.5, 1]
+                }
+            },
+            series : [
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:[
+                        {value:200, name:'入侵等级1'},
+                        {value:300, name:'入侵等级2'},
+                        {value:400, name:'入侵等级3'}
+                    ].sort(function (a, b) { return a.value - b.value}),
+                    roseType: 'angle',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(255, 255, 255, 1)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(255, 255, 255, 1)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#c23531',
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(255, 255, 255,, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+     <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('main2'));
+
+        // 指定图表的配置项和数据
+        var option = {
+          backgroundColor: '#47617b',
+
+            title: {
+                text: '每日入侵数量变化折线图',
+                left: 'center',
+                top: 0,
+            },
+            visualMap: {
+                show: false,
+                min: 200,
+                max: 1000,
+                inRange: {
+                    colorLightness: [0.6, 1]
+                }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['入侵等级1','入侵等级2','入侵等级3'],
+                top: 30
+            },
+            grid: {
+                left: '1%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['周一','周二','周三','周四','周五','周六','周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name:'入侵等级1',
+                    type:'line',
+                    stack: '总量',
+                    data:[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name:'入侵等级2',
+                    type:'line',
+                    stack: '总量',
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name:'入侵等级3',
+                    type:'line',
+                    stack: '总量',
+                    data:[150, 232, 201, 154, 190, 330, 410]
+                }
+
+            ]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option);
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="bootstrap/js/bootstrap.bundle.js"></script>
+    </body>
+</html>

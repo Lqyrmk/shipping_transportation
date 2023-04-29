@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>物流货运平台</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,shipper-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+
+    <div th:include="common :: common-head"></div>
+</head>
+
+<body style="background:url(images/bg.jpg);background-size: cover;backdrop-filter: blur(5px);">
+<header th:include="common :: #common-header"></header>
+
+<!--<header>-->
+<!--    <div class="navbar navbar-inverse navbar-fixed-top">-->
+<!--        <div class="container">-->
+<!--            <div class="navbar-header">-->
+<!--                <a class="navbar-brand hidden-sm" style="font-size: 1.5em" th:href="@{/templates/index.html}"-->
+<!--                   onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">物流货运平台</a>-->
+<!--            </div>-->
+<!--            <div class="navbar-collapse collapse" role="navigation">-->
+<!--                <ul class="nav navbar-nav">-->
+<!--                    <li><a th:href="@{/getGoodsInfo}" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">货物管理</a></li>-->
+<!--                    <li><a th:href="@{/getOrderInfo}" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">物流订单</a></li>-->
+<!--                    <li><a href="../whiteList.html" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">管理白名单</a></li>-->
+<!--                    <li><a href="../shipper.html" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v5doc'])">用户中心</a></li>-->
+<!--                </ul>-->
+<!--                <ul class="nav navbar-nav navbar-right hidden-sm">-->
+<!--                    <li><a href="../aboutUs.html" target="_self"-->
+<!--                           onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</header>-->
+
+<main role="main">
+    <div class="layui-fluid" style="padding-top:60px;">
+        <div class="layui-row layui-col-space15">
+
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body" style="height: 250px">
+                        <form th:action="@{/addGoods}" method="post">
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault01">货物名称</label>
+                                    <input type="text" name="goodsName" class="form-control"
+                                           id="validationDefault01" value=""
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault02">货物单价</label>
+                                    <input type="text" name="price" class="form-control"
+                                           id="validationDefault02" value=""
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault03">货物重量</label>
+                                    <input type="text" name="weight" class="form-control"
+                                           id="validationDefault03" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault04">现有库存</label>
+                                    <input type="text" name="stock" class="form-control"
+                                           id="validationDefault04" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <button class="btn btn-success" type="submit">添加</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+</body>
+<script>
+    layui.use(['laydate', 'form'],
+</script>
+
+</html>

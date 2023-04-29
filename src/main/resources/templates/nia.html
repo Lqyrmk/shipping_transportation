@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>goods_add</title>
+</head>
+<body>
+<form th:action="@{/getGoodsByInfo}" method="post">
+  <table>
+    <tr>
+      <th colspan="2">getGoodsByInfo</th>
+    </tr>
+    <tr>
+      <td>priceMin</td>
+      <td>
+        <input type="text" name="priceMin">
+      </td>
+    </tr>
+    <tr>
+      <td>priceMax</td>
+      <td>
+        <input type="text" name="priceMax">
+      </td>
+    </tr>
+    <tr>
+      <td>weightMin</td>
+      <td>
+        <input type="text" name="weightMin">
+      </td>
+    </tr>
+    <tr>
+      <td>weightMax</td>
+      <td>
+        <input type="text" name="weightMax">
+      </td>
+    </tr>
+    <tr>
+      <td>stockMin</td>
+      <td>
+        <input type="text" name="stockMin">
+      </td>
+    </tr>
+    <tr>
+      <td>stockMax</td>
+      <td>
+        <input type="text" name="stockMax">
+      </td>
+    </tr>
+    <tr>
+      <td>keywords</td>
+      <td>
+        <input type="text" name="keywords">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="add">
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

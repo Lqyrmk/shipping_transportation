@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>物流货运平台注册</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,shipper-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/login.css">
+	  <link rel="stylesheet" href="css/xadmin.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body class="login-bg" style="background:url(images/bg.jpg);background-size: cover;backdrop-filter: blur(5px);">
+
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">注册</div>
+        <div id="darkbannerwrap"></div>
+
+        <form method="post" class="layui-form" >
+            <input name="username" lay-verify="required" placeholder="用户名"  type="text"  class="layui-input" >
+            <hr class="hr15">
+            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            <input name="password" lay-verify="required" placeholder="确认密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            <input value="注册" lay-submit lay-filter="register" style="width:100%;" type="submit">
+            <hr class="hr20" >
+        </form>
+        <input value="回到登录" lay-submit lay-filter="login"
+               onclick="location.href=('/login')" style="width:100%;" type="button">
+    </div>
+
+    <script>
+        $(function  () {
+            layui.use('form', function(){
+              var form = layui.form;
+              //监听提交
+              form.on('submit(register)', function(data){
+                // alert(888)
+                layer.msg(JSON.stringify(data.field),function(){
+                    location.href='index.html'
+                });
+                return false;
+              });
+            });
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们</title>
+
+
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/album.css" rel="stylesheet">
+    <style>
+        html,
+        body{
+            margin: 0;
+            padding: 0;
+            height: 200vh;
+            overflow-x: hidden;
+        }
+        .background{
+            background-image: url(images/bg2.jpg);
+            background-size: cover;
+            background-position: 50%,50%;
+            height: 200vh;
+            font: 900 40rem '';
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+        .background::before{
+            content: '';
+            background-size: cover;
+            background-image: inherit;
+            background-position: 50% 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -99;
+        }
+        .aa{
+            position: absolute;
+            letter-spacing: 2px;
+            top: 130vh;
+            width: 60%;
+            color: #fff;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-inverse navbar-fixed-top" >
+          <div class="container">
+            <div class="navbar-header">
+              <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand hidden-sm" style="font-size: 1.5em" href="index.html" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-首页'])">物流货运平台</a>
+            </div>
+            <div class="navbar-collapse collapse" role="navigation">
+              <ul class="nav navbar-nav">
+                <li><a href="goods/goods_info.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">物流记录</a></li>
+                <li><a href="statistics.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">数据统计</a></li>
+                <li><a href="whiteList.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">管理白名单</a></li>
+                <li><a href="shipper.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v5doc'])">用户中心</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right hidden-sm">
+                <li><a href="aboutUs.html" target="_self" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">关于</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </header>
+
+    <div class="background" style=" padding-top:100px ;height: 100%; ">
+        <span>ABOUT</span>
+        <span class="text-center">US</span>
+    </div>
+    <div class="aa">
+    <h1 class="text-center" >软件学院</h1>
+    <h2>
+        北京交通大学软件学院成立于 2003 年 3 月，是经教育部、国家计委批准成立的 37 所国家示范性软件学院之一，全国首批 33 所国家特色化示范性软件学院之一。学院为示范性软件学院联盟理事长与秘书处单位。
+        <br>学院坚持基于“立德树人、面向产业需求、突出能力与素质培养、强化实训实习环节、在工程实践与国际化教学环境中培养具有创新精神的高素质国际化软件人才”的办学理念，采用开放式、国际化的办学模式，构建面向产业、面向世界、面向未来，实施产教融合、中外融合、科教融合、跨界融合的人才培养模式，培养德智体美劳全面发展的国际化软件人才。
+    </h2>
+    </div>
+
+    <script>
+        const background = document.querySelector(".background")
+
+        document.addEventListener('scroll',()=>{
+            const srcollY = window.scrollY
+
+            if(scrollY !==0){
+                background.style.backgroundPosition = `calc(50% + ${scrollY}px) calc(50% + ${scrollY}px)`
+            }else{
+                background.style.backgroundPosition = ``
+            }
+        })
+    </script>
+</body>
+</html>
