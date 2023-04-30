@@ -15,6 +15,11 @@
         select * from shipper where shipper_id = #{shipperId}
     </select>
 
+    <!--Shipper getShipperByName(@Param("shipperName") String shipperName);-->
+    <select id="getShipperByName" resultType="Shipper">
+        select * from shipper where shipper_name = #{shipperName}
+    </select>
+
     <resultMap id="shipperAndOrderResultMap" type="Shipper">
         <id column="shipper_id" property="shipperId"></id>
         <result column="shipper_name" property="shipperName"></result>
@@ -38,5 +43,11 @@
     <select id="getOrderAndShipperAndCarrierByOrderIdByStepTwo" resultType="Shipper">
         select * from shipper where shipper_id = #{shipperId}
     </select>
+
+    <!--void insertShipper(Shipper shipper);-->
+    <insert id="insertShipper">
+        insert into shipper (`shipper_name`, `password`)
+        values (#{shipperName}, #{password})
+    </insert>
 
 </mapper>

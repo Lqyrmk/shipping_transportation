@@ -21,11 +21,15 @@
         <div id="darkbannerwrap"></div>
 
         <form method="post" class="layui-form" >
-            <input name="username" lay-verify="required" placeholder="用户名"  type="text"  class="layui-input" >
+            <h5 th:text="${registerError}" style="color: red;"></h5>
+            <input name="shipperName" lay-verify="required" th:value="${shipperName}"
+                   placeholder="用户名"  type="text"  class="layui-input" >
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <input name="password" lay-verify="required" th:value="${password}"
+                   placeholder="密码"  type="text" class="layui-input">
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="确认密码"  type="password" class="layui-input">
+            <input name="passwordConfirm" lay-verify="required" th:value="${passwordConfirm}"
+                   placeholder="确认密码"  type="text" class="layui-input">
             <hr class="hr15">
             <input value="注册" lay-submit lay-filter="register" style="width:100%;" type="submit">
             <hr class="hr20" >
@@ -35,19 +39,6 @@
     </div>
 
     <script>
-        $(function  () {
-            layui.use('form', function(){
-              var form = layui.form;
-              //监听提交
-              form.on('submit(register)', function(data){
-                // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='index.html'
-                });
-                return false;
-              });
-            });
-        })
     </script>
 </body>
 </html>

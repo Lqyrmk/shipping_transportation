@@ -42,4 +42,7 @@ public class Order {
     // 运输总价
     private Double totalPrice;
 
+    // 订单状态
+    private String state;
+
 }

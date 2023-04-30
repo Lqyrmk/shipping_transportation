@@ -25,11 +25,6 @@ public class ShipperController {
     @Autowired
     private ShipperService shipperService;
 
-//    @RequestMapping("/index")
-//    public String index() {
-//        return "index";
-//    }
-
     /**
      * @description: 注册页
      * @author: YuanmingLiu
@@ -40,6 +35,37 @@ public class ShipperController {
     @GetMapping("/register")
     public String registerPage() {
         return "register";
+    }
+
+    /**
+     * @description: 用户注册
+     * @author: YuanmingLiu
+     * @date: 2023/4/23 20:28
+     * @param: []
+     * @return: java.lang.String
+     **/
+    @PostMapping("/register")
+    public String register(Shipper shipper, String passwordConfirm, Model model) {
+
+        model.addAttribute("shipperName", shipper.getShipperName());
+        model.addAttribute("password", shipper.getPassword());
+        model.addAttribute("passwordConfirm", passwordConfirm);
+
+        if (!shipper.getPassword().equals(passwordConfirm)) {
+            // 两次密码不一致
+            model.addAttribute("registerError", "两次密码不一致");
+            return "register";
+        }
+
+        // 用户名已存在
+        if (shipperService.getShipperByName(shipper.getShipperName()) != null) {
+            model.addAttribute("registerError", "用户名已存在");
+            return "register";
+        }
+        // 用户名可用
+        shipperService.registerShipper(shipper);
+        // 重定向防止表单重复提交
+        return "redirect:/login";
     }
 
 
@@ -102,11 +128,16 @@ public class ShipperController {
         return "index";
     }
 
-    @ResponseBody
-    @GetMapping("/testShipper")
-    public Shipper testShipper(@RequestParam("shipperId") Integer shipperId) {
-        Shipper shipper = shipperService.getShipperById(shipperId);
-        return shipper;
+    /**
+     * @description: 退出登录
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 18:33
+     * @param: []
+     * @return: java.lang.String
+     **/
+    @GetMapping("/logout")
+    public String logout() {
+        return "login";
     }
 
 }

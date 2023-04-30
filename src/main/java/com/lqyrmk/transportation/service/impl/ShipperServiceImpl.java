@@ -29,4 +29,15 @@ public class ShipperServiceImpl implements ShipperService {
         Shipper shipper = shipperMapper.getShipperAndOrderByShipperIdByStepOne(shipperId);
         return shipper;
     }
+
+    @Override
+    public Shipper getShipperByName(String shipperName) {
+        Shipper shipper = shipperMapper.getShipperByName(shipperName);
+        return shipper;
+    }
+
+    @Override
+    public void registerShipper(Shipper shipper) {
+        shipperMapper.insertShipper(shipper);
+    }
 }

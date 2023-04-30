@@ -32,6 +32,15 @@ public interface ShipperMapper {
     Shipper getShipperById(@Param("shipperId") Integer shipperId);
 
     /**
+     * @description: 根据用户名查询托运人
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 18:08
+     * @param: [shipperName]
+     * @return: com.lqyrmk.transportation.entity.Shipper
+     **/
+    Shipper getShipperByName(@Param("shipperName") String shipperName);
+
+    /**
      * @description: 根据托运人id查询托运人信息 第一步
      * @author: YuanmingLiu
      * @date: 2023/4/29 23:51
@@ -49,4 +58,12 @@ public interface ShipperMapper {
      **/
     Shipper getOrderAndShipperAndCarrierByOrderIdByStepTwo(@Param("shipperId") Integer shipperId);
 
+    /**
+     * @description: 添加托运人信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 18:13
+     * @param: [shipper]
+     * @return: void
+     **/
+    void insertShipper(Shipper shipper);
 }

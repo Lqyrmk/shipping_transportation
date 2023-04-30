@@ -27,4 +27,21 @@ public interface ShipperService {
      **/
     Shipper getShipperById(Integer shipperId);
 
+    /**
+     * @description: 根据用户名查询托运人
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 18:07
+     * @param: [shipperName]
+     * @return: com.lqyrmk.transportation.entity.Shipper
+     **/
+    Shipper getShipperByName(String shipperName);
+
+    /**
+     * @description: 注册托运人
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 18:12
+     * @param: [shipper]
+     * @return: void
+     **/
+    void registerShipper(Shipper shipper);
 }
