@@ -26,8 +26,8 @@
 
     <!--void insertOrderDetails(@Param("order") Order order, @Param("goodsList") GoodsList goodsList);-->
     <insert id="insertOrderDetails">
-        insert into order_details (`order_id`, `goods_id`, `goods_num`)
-        values (#{order.orderId}, #{goodsList.goodsId}, #{goodsList.num})
+        insert into order_details (`order_id`, `goods_id`, `goods_name`, `goods_num`)
+        values (#{order.orderId}, #{goodsList.goodsId}, #{goodsList.goodsName}, #{goodsList.num})
     </insert>
 
     <!--void deleteOrderDetails(@Param("orderId") Integer orderId);-->

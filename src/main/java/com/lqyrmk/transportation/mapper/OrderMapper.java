@@ -25,6 +25,15 @@ public interface OrderMapper {
     List<Order> getAllOrders();
 
     /**
+     * @description: 根据信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 16:30
+     * @param: [keywords]
+     * @return: java.util.List<com.lqyrmk.transportation.entity.Order>
+     **/
+    List<Order> getOrdersByInfo(@Param("keywords") String keywords);
+
+    /**
      * @description: 根据订单id查询订单信息
      * @author: YuanmingLiu
      * @date: 2023/4/29 17:40

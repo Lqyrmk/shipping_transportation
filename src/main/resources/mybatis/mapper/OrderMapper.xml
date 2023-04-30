@@ -8,7 +8,8 @@
     <resultMap id="orderAndShipperAndCarrierByStepResultMap" type="Order">
         <id column="order_id" property="orderId"></id>
         <result column="shipment_place" property="shipmentPlace"></result>
-        <result column="addressee" property="addressee"></result>
+        <result column="consignee" property="consignee"></result>
+        <result column="consignee_phone" property="consigneePhone"></result>
         <result column="destination" property="destination"></result>
         <result column="total_price" property="totalPrice"></result>
         <result column="total_weight" property="totalWeight"></result>
@@ -32,6 +33,22 @@
         select * from `order`
     </select>
 
+    <!--List<Order> getOrdersByInfo(@Param("keywords") String keywords);-->
+    <select id="getOrdersByInfo"
+            resultMap="orderAndShipperAndCarrierByStepResultMap">
+        select *
+        from `order`
+        left join `shipper`
+            on `order`.shipper_id = `shipper`.shipper_id
+        left join `carrier`
+            on `order`.carrier_id = `carrier`.carrier_id
+        where `shipment_place` like '%${keywords}%'
+           or `consignee` like '%${keywords}%'
+           or `destination` like '%${keywords}%'
+           or `shipper_name` like '%${keywords}%'
+           or `carrier_name` like '%${keywords}%'
+    </select>
+
     <!--Order getOrderById(@Param("orderId") Integer orderId);-->
     <select id="getOrderById" resultType="Order">
         select * from `order` where order_id = #{orderId}
@@ -51,15 +68,15 @@
 
     <!--void insertOrder(Order order);-->
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="orderId">
-        insert into `order`(`order_id`, `shipper_id`, `carrier_id`, `shipment_place`, `addressee`, `destination`, `total_weight`, `total_price`)
-        values (#{orderId}, #{shipper.shipperId}, #{carrier.carrierId}, #{shipmentPlace}, #{addressee}, #{destination}, #{totalWeight}, #{totalPrice})
+        insert into `order`(`order_id`, `shipper_id`, `carrier_id`, `shipment_place`, `consignee`, `consignee_phone`, `destination`, `total_weight`, `total_price`)
+        values (#{orderId}, #{shipper.shipperId}, #{carrier.carrierId}, #{shipmentPlace}, #{consignee}, #{consigneePhone}, #{destination}, #{totalWeight}, #{totalPrice})
     </insert>
 
     <!--void updateOrder(Order order);-->
     <update id="updateOrder">
         update `order`
         set `shipper_id`=#{shipper.shipperId}, `carrier_id`=#{carrier.carrierId}, `shipment_place`=#{shipmentPlace},
-            `addressee`=#{addressee}, `destination`=#{destination}, `total_weight`=#{totalWeight}, `total_price`=#{totalPrice}
+            `consignee`=#{consignee}, `consignee_phone`=#{consigneePhone}, `destination`=#{destination}, `total_weight`=#{totalWeight}, `total_price`=#{totalPrice}
         where `order_id`=#{orderId}
     </update>
 

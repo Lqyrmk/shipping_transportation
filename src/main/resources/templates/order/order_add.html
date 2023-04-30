@@ -20,7 +20,7 @@
 
             <div class="layui-col-md12">
                 <div class="layui-card">
-                    <div class="layui-card-body" style="height: 250px">
+                    <div class="layui-card-body" style="height: 300px">
                         <form th:action="@{/addOrder}" method="post">
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
@@ -41,29 +41,36 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationDefault03">收货人</label>
-                                    <input type="text" name="addressee" class="form-control"
+                                    <input type="text" name="consignee" class="form-control"
                                            id="validationDefault03" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault04">发货地</label>
-                                    <input type="text" name="shipmentPlace" class="form-control"
+                                    <label for="validationDefault04">收货人电话</label>
+                                    <input type="text" name="consigneePhone" class="form-control"
                                            id="validationDefault04" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault05">目的地</label>
-                                    <input type="text" name="destination" class="form-control"
+                                    <label for="validationDefault05">发货地</label>
+                                    <input type="text" name="shipmentPlace" class="form-control"
                                            id="validationDefault05" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault06">选择货物</label>
+                                    <label for="validationDefault06">目的地</label>
+                                    <input type="text" name="destination" class="form-control"
+                                           id="validationDefault06" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault07">选择货物</label>
                                     <input type="text" name="" class="form-control" readonly
-                                           id="validationDefault06" th:value="将自动提交清单中的所有货物" required>
+                                           id="validationDefault07" th:value="将自动提交清单中的所有货物" required>
                                 </div>
                             </div>
                             <div class="form-row">

@@ -22,19 +22,20 @@
                 <div class="layui-card">
                     <div class="layui-card-body" style="height: 500px">
                         <form th:action="@{/getOrderInfo}" method="get">
+                            <h3 th:text="${order.orderId + '号订单详情：'}"></h3>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault01">订单id</label>
-                                    <input type="text" name="orderId" class="form-control" readonly
-                                           id="validationDefault01" th:value="${order.orderId}"
+                                    <label for="validationDefault01">收货人姓名</label>
+                                    <input type="text" name="consignee" class="form-control" readonly
+                                           id="validationDefault01" th:value="${order.consignee}"
                                            required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault02">收货人姓名</label>
-                                    <input type="text" name="addressee" class="form-control" readonly
-                                           id="validationDefault02" th:value="${order.addressee}"
+                                    <label for="validationDefault02">收货人电话</label>
+                                    <input type="text" name="consigneePhone" class="form-control" readonly
+                                           id="validationDefault02" th:value="${order.consigneePhone}"
                                            required>
                                 </div>
                             </div>

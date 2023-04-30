@@ -16,6 +16,8 @@ public class OrderDetails {
     private Integer orderId;
 //    private Order order;
 
+    private String goodsName;
+
     private Goods goods;
 
     private Integer goodsNum;

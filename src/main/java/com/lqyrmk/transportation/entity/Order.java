@@ -25,7 +25,10 @@ public class Order {
     private Carrier carrier;
 
     // 收货人
-    private String addressee;
+    private String consignee;
+
+    // 收获人电话
+    private String consigneePhone;
 
     // 发货地
     private String shipmentPlace;

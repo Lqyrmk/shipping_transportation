@@ -21,6 +21,16 @@ public interface OrderService {
     List<Order> getAllOrders();
 
     /**
+     * @description: 根据信息查询订单
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 16:17
+     * @param: []
+     * @return: java.util.List<com.lqyrmk.transportation.entity.Order>
+     **/
+    List<Order> getOrdersByInfo(String keywords);
+
+
+    /**
      * @description: 根据id查询订单信息
      * @author: YuanmingLiu
      * @date: 2023/4/29 17:37

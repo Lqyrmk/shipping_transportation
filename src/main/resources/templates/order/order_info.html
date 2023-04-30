@@ -24,85 +24,23 @@
                     <div class="layui-card-body ">
                         <div class="layui-collapse" lay-filter="test">
                             <div class="layui-colla-item">
-                                <h2 class="layui-colla-title">条件筛选<i class="layui-icon layui-colla-icon"></i></h2>
-                                <div class="layui-colla-content">
-
-                                    <form class="layui-form" th:action="@{/getGoodsByInfo}" method="post">
-                                        <!--价格范围选择-->
-                                        <div class="layui-form-item">
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">价格范围</label>
-                                                <div class="layui-input-inline" style="width: 100px;">
-                                                    <!--price_min-->
-                                                    <input type="text" name="priceMin" placeholder="最低价格"
-                                                           autocomplete="off" class="layui-input" th:value="${priceMin}">
-                                                </div>
-                                                <div class="layui-form-mid">-</div>
-                                                <div class="layui-input-inline" style="width: 100px;">
-                                                    <!--price_max-->
-                                                    <input type="text" name="priceMax" placeholder="最高价格"
-                                                           autocomplete="off" class="layui-input" th:value="${priceMax}">
-                                                </div>
+                                <form class="layui-form" th:action="@{/getOrdersByInfo}" method="post">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">搜索</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="keywords" placeholder="输入订单信息关键词"
+                                                       autocomplete="off" class="layui-input" th:value="${keywords}">
                                             </div>
+                                            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                         </div>
-                                        <!--重量范围选择-->
-                                        <div class="layui-form-item">
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">重量范围</label>
-                                                <div class="layui-input-inline" style="width: 100px;">
-                                                    <!--weight_min-->
-                                                    <input type="text" name="weightMin" placeholder="最低重量"
-                                                           autocomplete="off" class="layui-input" th:value="${weightMin}">
-                                                </div>
-                                                <div class="layui-form-mid">-</div>
-                                                <div class="layui-input-inline" style="width: 100px;">
-                                                    <!--weight_max-->
-                                                    <input type="text" name="weightMax" placeholder="最高重量"
-                                                           autocomplete="off" class="layui-input" th:value="${weightMax}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--库存范围选择-->
-                                        <div class="layui-form-item">
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">库存范围</label>
-                                                <div class="layui-input-inline" style="width: 100px;">
-                                                    <!--stock_min-->
-                                                    <input type="text" name="stockMin" placeholder="最低库存量"
-                                                           autocomplete="off" class="layui-input" th:value="${stockMin}">
-                                                </div>
-                                                <div class="layui-form-mid">-</div>
-                                                <div class="layui-input-inline" style="width: 100px;">
-                                                    <!--stock_max-->
-                                                    <input type="text" name="stockMax" placeholder="最高库存量"
-                                                           autocomplete="off" class="layui-input" th:value="${stockMax}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <div class="layui-inline">
-                                                <label class="layui-form-label">搜索</label>
-                                                <div class="layui-input-inline">
-                                                    <input type="text" name="keywords" placeholder="输入货物名称关键词"
-                                                           autocomplete="off" class="layui-input" th:value="${keywords}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <div class="layui-input-block">
-                                                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="layui-card-header">
-<!--                        <button class="layui-btn layui-btn-danger" onclick="delAll()">-->
-<!--                            <i class="layui-icon"></i>批量删除-->
-<!--                        </button>-->
                         <button type="button" class="btn btn-success" onclick="location.href=('/toAddOrder')">
                             创建运输订单
                         </button>
@@ -117,8 +55,8 @@
                                 <th>收货人</th>
                                 <th>发货地</th>
                                 <th>目的地</th>
-<!--                                <th>运输重量</th>-->
-<!--                                <th>运输总价</th>-->
+                                <!--                                <th>运输重量</th>-->
+                                <!--                                <th>运输总价</th>-->
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -127,18 +65,22 @@
                                 <td th:text="${order.orderId}"></td>
                                 <td th:text="${order.shipper.shipperName}"></td>
                                 <td th:text="${order.carrier.carrierName}"></td>
-                                <td th:text="${order.addressee}"></td>
+                                <td th:text="${order.consignee}"></td>
                                 <td th:text="${order.shipmentPlace}"></td>
                                 <td th:text="${order.destination}"></td>
-<!--                                <td th:text="${order.totalWeight}"></td>-->
-<!--                                <td th:text="${order.totalPrice}"></td>-->
                                 <td class="td-manage">
                                     <button type="button" class="btn btn-info"
-                                            th:onclick="'javascript:window.location.href=\'' + @{'/showOrderDetails?orderId='+${order.orderId}} + '\';'">查看详情</button>
+                                            th:onclick="'javascript:window.location.href=\'' + @{'/showOrderDetails?orderId='+${order.orderId}} + '\';'">
+                                        查看详情
+                                    </button>
                                     <button type="button" class="btn btn-primary"
-                                            th:onclick="'javascript:window.location.href=\'' + @{'/toUpdateOrder?orderId='+${order.orderId}} + '\';'">编辑</button>
+                                            th:onclick="'javascript:window.location.href=\'' + @{'/toUpdateOrder?orderId='+${order.orderId}} + '\';'">
+                                        编辑
+                                    </button>
                                     <button type="button" class="btn btn-danger"
-                                            th:onclick="'javascript:window.location.href=\'' + @{'/deleteOrder/'+${order.orderId}} + '\';'">删除</button>
+                                            th:onclick="'javascript:window.location.href=\'' + @{'/deleteOrder/'+${order.orderId}} + '\';'">
+                                        删除
+                                    </button>
 
                                 </td>
                             </tr>

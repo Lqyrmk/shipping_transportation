@@ -30,6 +30,16 @@ public class OrderController {
         return "order/order_info";
     }
 
+    @PostMapping("/getOrdersByInfo")
+    public String getOrdersByInfo(String keywords, Model model) {
+        // 获取所有的订单信息
+        List<Order> orders = orderService.getOrdersByInfo(keywords);
+        // 将所有的订单信息在请求域中共享
+        model.addAttribute("allOrders", orders);
+        // 跳转到订单列表页面
+        return "order/order_info";
+    }
+
     private StringBuilder getOrderDetails(Order order) {
         // 获取该订单的详细货物
         List<OrderDetails> orderDetailsList = order.getOrderDetailsList();
@@ -38,7 +48,7 @@ public class OrderController {
         // 格式化货物信息
         for (int i = 0; i < orderDetailsList.size(); i++) {
             orderDetailsStrBuilder
-                    .append(orderDetailsList.get(i).getGoods().getGoodsName())
+                    .append(orderDetailsList.get(i).getGoodsName())
                     .append("*")
                     .append(orderDetailsList.get(i).getGoodsNum())
                     .append((i == orderDetailsList.size() - 1) ? "" : ", ");
@@ -84,15 +94,6 @@ public class OrderController {
         // 跳转到订单列表页面
         return "redirect:/getOrderInfo";
     }
-
-    @ResponseBody
-    @GetMapping("/niania")
-    public List<Order> nia() {
-        List<Order> orders = orderService.getAllOrders();
-        System.out.println("orders = " + orders);
-        return orders;
-    }
-
 
     @GetMapping("/toUpdateOrder")
     public String toUpdateOrder(Integer orderId, Model model) {

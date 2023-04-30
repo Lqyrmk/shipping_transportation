@@ -37,6 +37,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getOrdersByInfo(String keywords) {
+        List<Order> orders = orderMapper.getOrdersByInfo(keywords);
+        return orders;
+    }
+
+    @Override
     public Order getOrderById(Integer orderId) {
 //        Order order = orderMapper.getOrderById(orderId);
         Order order = orderMapper.getOrderAndShipperAndCarrierByOrderIdByStepOne(orderId);
