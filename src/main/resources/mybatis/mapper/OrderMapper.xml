@@ -76,7 +76,8 @@
     <update id="updateOrder">
         update `order`
         set `shipper_id`=#{shipper.shipperId}, `carrier_id`=#{carrier.carrierId}, `shipment_place`=#{shipmentPlace},
-            `consignee`=#{consignee}, `consignee_phone`=#{consigneePhone}, `destination`=#{destination}, `total_weight`=#{totalWeight}, `total_price`=#{totalPrice}
+            `consignee`=#{consignee}, `consignee_phone`=#{consigneePhone}, `destination`=#{destination},
+            `total_weight`=#{totalWeight}, `total_price`=#{totalPrice}, `state`=#{state}
         where `order_id`=#{orderId}
     </update>
 

@@ -35,7 +35,7 @@
     </select>
 
     <!--void insertGoods(Goods goods);-->
-    <insert id="insertGoods">
+    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="goodsId">
         insert into goods(`goods_id`, `goods_name`, `price`, `weight`, `stock`)
         values (#{goodsId}, #{goodsName}, #{price}, #{weight}, #{stock})
     </insert>
