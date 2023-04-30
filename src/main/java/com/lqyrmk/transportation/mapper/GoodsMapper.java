@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description
+ * @Description 货物持久层
  * @Author YuanmingLiu
  * @Date 2023/4/29 0:34
  */

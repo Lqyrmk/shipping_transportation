@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description
+ * @Description 货物控制层
  * @Author YuanmingLiu
  * @Date 2023/4/29 0:20
  */
@@ -25,9 +25,13 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @Autowired
-    private GoodsListService goodsListService;
-
+    /**
+     * @description: 获取所有的货物信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:11
+     * @param: [model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/getGoodsInfo")
     public String getGoodsInfo(Model model) {
         // 获取所有的货物信息
@@ -38,6 +42,13 @@ public class GoodsController {
         return "goods/goods_info";
     }
 
+    /**
+     * @description: 根据关键信息查询货物
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:11
+     * @param: [priceMin, priceMax, weightMin, weightMax, stockMin, stockMax, keywords, model]
+     * @return: java.lang.String
+     **/
     @PostMapping("/getGoodsByInfo")
     public String getGoodsByInfo(@RequestParam("priceMin") String priceMin,
                                  @RequestParam("priceMax") String priceMax,
@@ -68,12 +79,26 @@ public class GoodsController {
         return "goods/goods_info";
     }
 
+    /**
+     * @description: 跳转到添加货物页面
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:12
+     * @param: [model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/toAddGoods")
     public String toAddGoods(Model model) {
         // 跳转到添加货物页面
         return "goods/goods_add";
     }
 
+    /**
+     * @description: 添加货物
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:12
+     * @param: [goods]
+     * @return: java.lang.String
+     **/
     @PostMapping("/addGoods")
     public String addGoods(Goods goods) {
         //保存货物信息
@@ -82,6 +107,13 @@ public class GoodsController {
         return "redirect:/getGoodsInfo";
     }
 
+    /**
+     * @description: 跳转到更新货物页面
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:12
+     * @param: [goodsId, model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/toUpdateGoods")
     public String toUpdateGoods(@RequestParam("goodsId") Integer goodsId, Model model) {
         // 根据id查询货物信息
@@ -92,6 +124,13 @@ public class GoodsController {
         return "goods/goods_update";
     }
 
+    /**
+     * @description: 更新货物
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:12
+     * @param: [goods]
+     * @return: java.lang.String
+     **/
     @PostMapping("/updateGoods")
     public String updateGoods(Goods goods) {
         // 根据id修改货物信息
@@ -99,6 +138,13 @@ public class GoodsController {
         return "redirect:/getGoodsInfo";
     }
 
+    /**
+     * @description: 删除货物
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:13
+     * @param: [goodsId]
+     * @return: java.lang.String
+     **/
     @GetMapping("/deleteGoods/{goodsId}")
     public String deleteGoods(@PathVariable("goodsId") Integer goodsId) {
         // 根据id删除货物
@@ -106,11 +152,5 @@ public class GoodsController {
         return "redirect:/getGoodsInfo";
     }
 
-    @GetMapping("/addToList")
-    public String addToList(@RequestParam("goodsId") Integer goodsId) {
-        // 将货物添加到运输清单中
-        goodsListService.addGoodsToList(goodsId);
-        return "redirect:/getGoodsInfo";
-    }
 
 }

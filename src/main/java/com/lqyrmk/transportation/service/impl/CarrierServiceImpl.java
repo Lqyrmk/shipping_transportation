@@ -4,7 +4,7 @@ import com.lqyrmk.transportation.service.CarrierService;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description
+ * @Description 承运商业务层
  * @Author YuanmingLiu
  * @Date 2023/4/29 21:51
  */

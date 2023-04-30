@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 货物清单业务层实现类
  * @Author YuanmingLiu
  * @Date 2023/4/29 18:38
  */

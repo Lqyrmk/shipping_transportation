@@ -8,13 +8,12 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 货物清单持久层
  * @Author YuanmingLiu
  * @Date 2023/4/29 18:38
  */
 @Mapper
 public interface GoodsListMapper {
-
 
     /**
      * @description: 查询货物清单的所有货物

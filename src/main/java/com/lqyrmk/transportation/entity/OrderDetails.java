@@ -1,10 +1,9 @@
 package com.lqyrmk.transportation.entity;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import lombok.Data;
 
 /**
- * @Description
+ * @Description 订单细节（关系）类
  * @Author YuanmingLiu
  * @Date 2023/4/29 0:19
  */

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description
+ * @Description 货物业务层实现类
  * @Author YuanmingLiu
  * @Date 2023/4/29 0:33
  */

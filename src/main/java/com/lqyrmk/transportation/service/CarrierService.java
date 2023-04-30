@@ -1,7 +1,7 @@
 package com.lqyrmk.transportation.service;
 
 /**
- * @Description
+ * @Description 承运商业务层接口
  * @Author YuanmingLiu
  * @Date 2023/4/29 21:51
  */

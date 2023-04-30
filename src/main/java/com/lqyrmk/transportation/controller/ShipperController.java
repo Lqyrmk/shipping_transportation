@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Description
+ * @Description 用户（托运人）控制层
  * @Author YuanmingLiu
  * @Date 2023/4/27 19:14
  */

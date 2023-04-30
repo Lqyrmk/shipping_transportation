@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description
+ * @Description 货物业务层接口
  * @Author YuanmingLiu
  * @Date 2023/4/29 0:33
  */

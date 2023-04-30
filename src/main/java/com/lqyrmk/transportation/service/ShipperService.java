@@ -3,7 +3,7 @@ package com.lqyrmk.transportation.service;
 import com.lqyrmk.transportation.entity.Shipper;
 
 /**
- * @Description
+ * @Description 用户（托运人）业务层接口
  * @Author YuanmingLiu
  * @Date 2023/4/28 1:11
  */

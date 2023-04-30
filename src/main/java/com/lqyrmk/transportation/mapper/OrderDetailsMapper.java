@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 订单细节（关系）持久层
  * @Author YuanmingLiu
  * @Date 2023/4/29 19:36
  */

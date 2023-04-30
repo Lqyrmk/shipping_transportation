@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * @Description
+ * @Description 承运商持久层
  * @Author YuanmingLiu
  * @Date 2023/4/29 21:52
  */

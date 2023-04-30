@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 用户（托运人）类
  * @Author YuanmingLiu
  * @Date 2023/4/27 19:55
  */

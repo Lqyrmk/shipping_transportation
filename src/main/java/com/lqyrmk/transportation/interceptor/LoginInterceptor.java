@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Description 登录检查拦截
+ * @Description 登录检查拦截器
  * @Author YuanmingLiu
  * @Date 2023/4/30 18:39
  */

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description
+ * @Description 用户（托运人）业务层实现类
  * @Author YuanmingLiu
  * @Date 2023/4/28 1:11
  */

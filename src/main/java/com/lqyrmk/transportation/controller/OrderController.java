@@ -24,6 +24,13 @@ public class OrderController {
     @Autowired
     private GoodsListService goodsListService;
 
+    /**
+     * @description: 查询所有的订单
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:07
+     * @param: [model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/getOrderInfo")
     public String getOrderInfo(Model model) {
         // 获取所有的订单信息
@@ -34,6 +41,13 @@ public class OrderController {
         return "order/order_info";
     }
 
+    /**
+     * @description: 根据关键信息查询订单信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:08
+     * @param: [keywords, model]
+     * @return: java.lang.String
+     **/
     @PostMapping("/getOrdersByInfo")
     public String getOrdersByInfo(String keywords, Model model) {
         // 获取所有的订单信息
@@ -45,6 +59,13 @@ public class OrderController {
         return "order/order_info";
     }
 
+    /**
+     * @description: 格式化获取订单货物细节
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:08
+     * @param: [orderDetailsList]
+     * @return: java.lang.StringBuilder
+     **/
     private StringBuilder getOrderDetails(List<OrderDetails> orderDetailsList) {
         // 获取该订单的详细货物
         StringBuilder orderDetailsStrBuilder = new StringBuilder();
@@ -61,6 +82,13 @@ public class OrderController {
         return orderDetailsStrBuilder;
     }
 
+    /**
+     * @description: 获取某个订单的详细信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:09
+     * @param: [orderId, model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/showOrderDetails")
     public String showOrderDetails(Integer orderId, Model model) {
         // 根据id查询订单信息
@@ -77,6 +105,13 @@ public class OrderController {
         return "order/order_details";
     }
 
+    /**
+     * @description: 跳转到添加订单页面
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:09
+     * @param: [model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/toAddOrder")
     public String toAddOrder(Model model) {
         // 获取该订单的详细货物
@@ -102,6 +137,13 @@ public class OrderController {
         return "order/order_add";
     }
 
+    /**
+     * @description: 添加订单
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:09
+     * @param: [order, shipperId, carrierId]
+     * @return: java.lang.String
+     **/
     @PostMapping("/addOrder")
     public String addOrder(Order order, Integer shipperId, Integer carrierId) {
         Shipper shipper = new Shipper();
@@ -118,6 +160,13 @@ public class OrderController {
         return "redirect:/getOrderInfo";
     }
 
+    /**
+     * @description: 跳转到更新订单页面
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:09
+     * @param: [orderId, model]
+     * @return: java.lang.String
+     **/
     @GetMapping("/toUpdateOrder")
     public String toUpdateOrder(Integer orderId, Model model) {
         // 根据id查询订单信息
@@ -134,6 +183,13 @@ public class OrderController {
         return "order/order_update";
     }
 
+    /**
+     * @description: 更新订单
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:10
+     * @param: [order, shipperId, carrierId]
+     * @return: java.lang.String
+     **/
     @PostMapping("/updateOrder")
     public String updateOrder(Order order, Integer shipperId, Integer carrierId) {
         Shipper shipper = new Shipper();
@@ -149,12 +205,18 @@ public class OrderController {
         return "redirect:/getOrderInfo";
     }
 
+    /**
+     * @description: 根据id删除订单
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 22:10
+     * @param: [orderId]
+     * @return: java.lang.String
+     **/
     @GetMapping("/deleteOrder/{orderId}")
     public String deleteOrder(@PathVariable("orderId") Integer orderId) {
         // 根据id删除订单
         orderService.deleteOrder(orderId);
         return "redirect:/getOrderInfo";
     }
-
 
 }

@@ -3,7 +3,7 @@ package com.lqyrmk.transportation.entity;
 import lombok.Data;
 
 /**
- * @Description
+ * @Description 货物清单类
  * @Author YuanmingLiu
  * @Date 2023/4/29 18:36
  */

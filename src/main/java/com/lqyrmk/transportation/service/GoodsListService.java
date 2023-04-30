@@ -6,7 +6,7 @@ import com.lqyrmk.transportation.entity.GoodsList;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 货物清单业务层接口
  * @Author YuanmingLiu
  * @Date 2023/4/29 18:37
  */
