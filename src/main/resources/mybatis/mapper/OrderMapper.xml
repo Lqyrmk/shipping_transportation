@@ -58,7 +58,7 @@
     <!--void updateOrder(Order order);-->
     <update id="updateOrder">
         update `order`
-        set `shipper_id`=#{shipperId}, `carrier_id`=#{carrierId}, `shipment_place`=#{shipmentPlace},
+        set `shipper_id`=#{shipper.shipperId}, `carrier_id`=#{carrier.carrierId}, `shipment_place`=#{shipmentPlace},
             `addressee`=#{addressee}, `destination`=#{destination}, `total_weight`=#{totalWeight}, `total_price`=#{totalPrice}
         where `order_id`=#{orderId}
     </update>

@@ -1,11 +1,7 @@
 package com.lqyrmk.transportation.controller;
 
-import com.lqyrmk.transportation.entity.Carrier;
-import com.lqyrmk.transportation.entity.Goods;
-import com.lqyrmk.transportation.entity.Order;
-import com.lqyrmk.transportation.entity.Shipper;
+import com.lqyrmk.transportation.entity.*;
 import com.lqyrmk.transportation.service.OrderService;
-import com.lqyrmk.transportation.service.ShipperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @Description
+ * @Description 订单控制层
  * @Author YuanmingLiu
  * @Date 2023/4/29 16:26
  */
@@ -23,9 +19,6 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
-
-    @Autowired
-    private ShipperService shipperService;
 
     @GetMapping("/getOrderInfo")
     public String getOrderInfo(Model model) {
@@ -37,47 +30,56 @@ public class OrderController {
         return "order/order_info";
     }
 
+    private StringBuilder getOrderDetails(Order order) {
+        // 获取该订单的详细货物
+        List<OrderDetails> orderDetailsList = order.getOrderDetailsList();
+        StringBuilder orderDetailsStrBuilder = new StringBuilder();
+
+        // 格式化货物信息
+        for (int i = 0; i < orderDetailsList.size(); i++) {
+            orderDetailsStrBuilder
+                    .append(orderDetailsList.get(i).getGoods().getGoodsName())
+                    .append("*")
+                    .append(orderDetailsList.get(i).getGoodsNum())
+                    .append((i == orderDetailsList.size() - 1) ? "" : ", ");
+        }
+
+        return orderDetailsStrBuilder;
+    }
+
     @GetMapping("/showOrderDetails")
-    public String showOrderDetails(@RequestParam("orderId") Integer orderId, Model model) {
+    public String showOrderDetails(Integer orderId, Model model) {
         // 根据id查询订单信息
         Order order = orderService.getOrderById(orderId);
-        //根据订单信息共享到请求域中
+        // 共享订单信息到请求域中
         model.addAttribute("order", order);
 
-//        // 获取订单对应的托运人
-//        Integer shipperId = order.getShipperId();
-//        Shipper shipper = shipperService.getShipperById(shipperId);
-//
-//        model.addAttribute("shipper", shipper);
+        // 获取该订单的详细货物
+        StringBuilder orderDetailsStrBuilder = getOrderDetails(order);
+        // 共享订单货物信息到请求域中
+        model.addAttribute("orderDetails", orderDetailsStrBuilder);
 
         // 跳转到订单详情页面
         return "order/order_details";
     }
 
     @GetMapping("/toAddOrder")
-    public String toAddOrder(Model model) {
+    public String toAddOrder() {
         // 跳转到创建订单页面
         return "order/order_add";
     }
 
     @PostMapping("/addOrder")
-    public String addOrder(@RequestParam("shipperId") Integer shipperId,
-                           @RequestParam("carrierId") Integer carrierId,
-                           @RequestParam("addressee") String addressee,
-                           @RequestParam("shipmentPlace") String shipmentPlace,
-                           @RequestParam("destination") String destination) {
-        Order order = new Order();
+    public String addOrder(Order order, Integer shipperId, Integer carrierId) {
         Shipper shipper = new Shipper();
         shipper.setShipperId(shipperId);
         Carrier carrier = new Carrier();
         carrier.setCarrierId(carrierId);
+
         order.setShipper(shipper);
         order.setCarrier(carrier);
-        order.setAddressee(addressee);
-        order.setShipmentPlace(shipmentPlace);
-        order.setDestination(destination);
+
         //保存订单信息
-        System.out.println(order);
         orderService.saveOrder(order);
         // 跳转到订单列表页面
         return "redirect:/getOrderInfo";
@@ -93,17 +95,31 @@ public class OrderController {
 
 
     @GetMapping("/toUpdateOrder")
-    public String toUpdateOrder(@RequestParam("orderId") Integer orderId, Model model) {
+    public String toUpdateOrder(Integer orderId, Model model) {
         // 根据id查询订单信息
         Order order = orderService.getOrderById(orderId);
         //根据订单信息共享到请求域中
         model.addAttribute("order", order);
+
+        // 获取该订单的详细货物
+        StringBuilder orderDetailsStrBuilder = getOrderDetails(order);
+        // 共享订单货物信息到请求域中
+        model.addAttribute("orderDetails", orderDetailsStrBuilder);
+
         // 跳转到更新订单页面
         return "order/order_update";
     }
 
     @PostMapping("/updateOrder")
-    public String updateOrder(Order order) {
+    public String updateOrder(Order order, Integer shipperId, Integer carrierId) {
+        Shipper shipper = new Shipper();
+        shipper.setShipperId(shipperId);
+        Carrier carrier = new Carrier();
+        carrier.setCarrierId(carrierId);
+
+        order.setShipper(shipper);
+        order.setCarrier(carrier);
+
         // 根据id修改订单信息
         orderService.updateOrder(order);
         return "redirect:/getOrderInfo";

@@ -40,17 +40,16 @@ public class OrderServiceImpl implements OrderService {
     public Order getOrderById(Integer orderId) {
 //        Order order = orderMapper.getOrderById(orderId);
         Order order = orderMapper.getOrderAndShipperAndCarrierByOrderIdByStepOne(orderId);
-        System.out.println("order = " + order);
         return order;
     }
 
     @Override
     public void saveOrder(Order order) {
 
-        System.out.println("order1 = " + order);
+//        System.out.println("order1 = " + order);
         // 添加订单记录，获得自增id
         orderMapper.insertOrder(order);
-        System.out.println("order2 = " + order);
+//        System.out.println("order2 = " + order);
 
         double totalPrice = 0;
         double totalWeight = 0;
@@ -65,8 +64,8 @@ public class OrderServiceImpl implements OrderService {
         // 更新订单记录中的总价和总重
         order.setTotalPrice(totalPrice);
         order.setTotalWeight(totalWeight);
-        System.out.println("totalPrice = " + totalPrice);
-        System.out.println("totalWeight = " + totalWeight);
+//        System.out.println("totalPrice = " + totalPrice);
+//        System.out.println("totalWeight = " + totalWeight);
         orderMapper.updateOrderPriceAndWeight(order);
 
         // 清空货物清单

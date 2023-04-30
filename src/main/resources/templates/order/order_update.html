@@ -32,73 +32,81 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault02">托运人</label>
-                                    <input type="text" name="shipperId" class="form-control"
-                                           id="validationDefault02" th:value="${order.shipperId}"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationDefault03">承运人</label>
-                                    <input type="text" name="carrierId" class="form-control"
-                                           id="validationDefault03" th:value="${order.carrierId}"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationDefault04">收货人</label>
+                                    <label for="validationDefault02">收货人姓名</label>
                                     <input type="text" name="addressee" class="form-control"
-                                           id="validationDefault04" th:value="${order.addressee}"
+                                           id="validationDefault02" th:value="${order.addressee}"
                                            required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault05">发货地</label>
+                                    <label for="validationDefault03">托运人id</label>
+                                    <input type="text" name="shipperId" class="form-control" readonly
+                                           id="validationDefault03" th:value="${order.shipper.shipperId}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault04">托运人姓名</label>
+                                    <input type="text" name="shipperId" class="form-control" readonly
+                                           id="validationDefault04" th:value="${order.shipper.shipperName}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault05">承运人id</label>
+                                    <input type="text" name="carrierId" class="form-control" readonly
+                                           id="validationDefault05" th:value="${order.carrier.carrierId}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault06">承运人姓名</label>
+                                    <input type="text" name="carrierId" class="form-control" readonly
+                                           id="validationDefault06" th:value="${order.carrier.carrierName}"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationDefault07">发货地</label>
                                     <input type="text" name="shipmentPlace" class="form-control"
-                                           id="validationDefault05" th:value="${order.shipmentPlace}"
+                                           id="validationDefault07" th:value="${order.shipmentPlace}"
                                            required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault06">目的地</label>
+                                    <label for="validationDefault08">目的地</label>
                                     <input type="text" name="destination" class="form-control"
-                                           id="validationDefault06" th:value="${order.destination}"
+                                           id="validationDefault08" th:value="${order.destination}"
                                            required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault07">运输货物</label>
+                                    <label for="validationDefault09">运输货物</label>
                                     <input type="text" name="goodsInfo" class="form-control" readonly
-                                           id="validationDefault07" th:value="${order.addressee}"
+                                           id="validationDefault09" th:value="${orderDetails}"
                                            required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault08">运输货物</label>
-                                    <input type="text" name="goodsInfo" class="form-control" readonly
-                                           id="validationDefault08" th:value="${order.addressee}"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationDefault09">运输重量</label>
+                                    <label for="validationDefault10">运输重量</label>
                                     <input type="text" name="totalWeight" class="form-control" readonly
-                                           id="validationDefault09" th:value="${order.totalWeight}"
+                                           id="validationDefault10" th:value="${order.totalWeight}"
                                            required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationDefault10">运输总价</label>
+                                    <label for="validationDefault11">运输总价</label>
                                     <input type="text" name="totalPrice" class="form-control" readonly
-                                           id="validationDefault10" th:value="${order.totalPrice}"
+                                           id="validationDefault11" th:value="${order.totalPrice}"
                                            required>
                                 </div>
                             </div>
