@@ -33,4 +33,9 @@
         delete from goods_list
     </delete>
 
+    <!--void deleteGoodsList(@Param("goodsId") Integer goodsId);-->
+    <delete id="deleteGoodsList">
+        delete from goods_list where `goods_id`=#{goodsId}
+    </delete>
+
 </mapper>

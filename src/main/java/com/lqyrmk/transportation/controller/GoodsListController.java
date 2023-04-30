@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -31,6 +32,13 @@ public class GoodsListController {
         model.addAttribute("allGoodsItem", allGoodsItem);
         // 跳转到货物列表页面
         return "goods_list/goods_list_info";
+    }
+
+    @GetMapping("/deleteGoodsList/{goodsId}")
+    public String deleteGoodsList(@PathVariable("goodsId") Integer goodsId) {
+        // 根据id删除订单
+        goodsListService.deleteGoodsList(goodsId);
+        return "redirect:/getGoodsListInfo";
     }
 
 }

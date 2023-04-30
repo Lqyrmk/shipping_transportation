@@ -24,6 +24,9 @@
                     <div class="layui-card-body ">
                     </div>
                     <div class="layui-card-header">
+                        <button type="button" class="btn btn-success" onclick="location.href=('/toAddOrder')">
+                            生成运输订单
+                        </button>
                     </div>
                     <div class="layui-card-body ">
                         <table class="layui-table layui-form">
@@ -43,11 +46,8 @@
                                 <td th:text="${goodsItem.weight}"></td>
                                 <td th:text="${goodsItem.num}"></td>
                                 <td class="td-manage">
-                                    <button type="button" class="btn btn-primary"
-                                            th:onclick="'javascript:window.location.href=\'' + @{'/toUpdateGoodsList?goodsId='+${goodsItem.goodsId}} + '\';'">编辑</button>
                                     <button type="button" class="btn btn-danger"
                                             th:onclick="'javascript:window.location.href=\'' + @{'/deleteGoodsList/'+${goodsItem.goodsId}} + '\';'">删除</button>
-
                                 </td>
                             </tr>
                             </tbody>

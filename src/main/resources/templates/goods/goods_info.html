@@ -134,13 +134,11 @@
                         </div>
                     </div>
                     <div class="layui-card-header">
-<!--                        <button class="layui-btn layui-btn-danger" onclick="delAll()">-->
-<!--                            <i class="layui-icon"></i>批量删除-->
-<!--                        </button>-->
                         <button type="button" class="btn btn-success" onclick="location.href=('/toAddGoods')">
                             添加货物
                         </button>
                     </div>
+                    <h5 th:text="${orderError}" style="color: red"></h5>
                     <div class="layui-card-body ">
                         <table class="layui-table layui-form">
                             <thead>

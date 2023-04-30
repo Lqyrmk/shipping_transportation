@@ -60,4 +60,13 @@ public interface GoodsListMapper {
      * @return: void
      **/
     void clearGoodsList();
+
+    /**
+     * @description:  删除货物清单中的货物
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 19:03
+     * @param: [goodsId]
+     * @return: void
+     **/
+    void deleteGoodsList(@Param("goodsId") Integer goodsId);
 }

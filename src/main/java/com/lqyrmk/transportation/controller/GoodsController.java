@@ -77,7 +77,6 @@ public class GoodsController {
     @PostMapping("/addGoods")
     public String addGoods(Goods goods) {
         //保存货物信息
-        System.out.println(goods);
         goodsService.saveGoods(goods);
         // 跳转到货物列表页面
         return "redirect:/getGoodsInfo";

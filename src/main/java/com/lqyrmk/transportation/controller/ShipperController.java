@@ -100,7 +100,7 @@ public class ShipperController {
         }
         // 登录失败回到登录页面
         else {
-            model.addAttribute("msg", "账号密码错误");
+            model.addAttribute("loginError", "用户名或密码错误");
             // 回到登录页面
             return "login";
         }

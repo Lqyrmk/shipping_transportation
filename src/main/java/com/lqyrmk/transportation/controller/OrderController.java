@@ -1,6 +1,7 @@
 package com.lqyrmk.transportation.controller;
 
 import com.lqyrmk.transportation.entity.*;
+import com.lqyrmk.transportation.service.GoodsListService;
 import com.lqyrmk.transportation.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private GoodsListService goodsListService;
+
     @GetMapping("/getOrderInfo")
     public String getOrderInfo(Model model) {
         // 获取所有的订单信息
@@ -36,13 +40,13 @@ public class OrderController {
         List<Order> orders = orderService.getOrdersByInfo(keywords);
         // 将所有的订单信息在请求域中共享
         model.addAttribute("allOrders", orders);
+        model.addAttribute("keywords", keywords);
         // 跳转到订单列表页面
         return "order/order_info";
     }
 
-    private StringBuilder getOrderDetails(Order order) {
+    private StringBuilder getOrderDetails(List<OrderDetails> orderDetailsList) {
         // 获取该订单的详细货物
-        List<OrderDetails> orderDetailsList = order.getOrderDetailsList();
         StringBuilder orderDetailsStrBuilder = new StringBuilder();
 
         // 格式化货物信息
@@ -65,7 +69,7 @@ public class OrderController {
         model.addAttribute("order", order);
 
         // 获取该订单的详细货物
-        StringBuilder orderDetailsStrBuilder = getOrderDetails(order);
+        StringBuilder orderDetailsStrBuilder = getOrderDetails(order.getOrderDetailsList());
         // 共享订单货物信息到请求域中
         model.addAttribute("orderDetails", orderDetailsStrBuilder);
 
@@ -74,7 +78,26 @@ public class OrderController {
     }
 
     @GetMapping("/toAddOrder")
-    public String toAddOrder() {
+    public String toAddOrder(Model model) {
+        // 获取该订单的详细货物
+        StringBuilder goodsListStrBuilder = new StringBuilder();
+        List<GoodsList> goodsList = goodsListService.getGoodsList();
+
+        // 如果清单中没有货物，则跳转到货物页面
+        if (goodsList.isEmpty()) {
+            model.addAttribute("orderError", "清单中没有货物，请添加货物！");
+            return "forward:/getGoodsInfo";
+        }
+
+        // 格式化货物信息
+        for (int i = 0; i < goodsList.size(); i++) {
+            goodsListStrBuilder
+                    .append(goodsList.get(i).getGoodsName())
+                    .append("*")
+                    .append(goodsList.get(i).getNum())
+                    .append((i == goodsList.size() - 1) ? "" : ", ");
+        }
+        model.addAttribute("goodsInfo", goodsListStrBuilder);
         // 跳转到创建订单页面
         return "order/order_add";
     }
@@ -103,7 +126,7 @@ public class OrderController {
         model.addAttribute("order", order);
 
         // 获取该订单的详细货物
-        StringBuilder orderDetailsStrBuilder = getOrderDetails(order);
+        StringBuilder orderDetailsStrBuilder = getOrderDetails(order.getOrderDetailsList());
         // 共享订单货物信息到请求域中
         model.addAttribute("orderDetails", orderDetailsStrBuilder);
 
