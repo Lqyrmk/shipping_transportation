@@ -12,6 +12,8 @@
 
 * [ ] Assignment 4：Event-notification for microservices
 
+---
+
 > The following files will be stored in the git repository's project directory:
 > * The running and testing screen capture;
 > * The system design document.
