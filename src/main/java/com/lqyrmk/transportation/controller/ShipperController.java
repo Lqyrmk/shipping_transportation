@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -117,14 +115,6 @@ public class ShipperController {
      **/
     @GetMapping("/index.html")
     public String indexPage(HttpSession session, Model model) {
-//        Object loginUser = session.getAttribute("loginUser");
-//        if (loginUser != null) {
-//            return "main";
-//        } else {
-//            // 回到登录页面
-//            model.addAttribute("msg", "请重新登录");
-//            return "login";
-//        }
         return "index";
     }
 
@@ -136,7 +126,8 @@ public class ShipperController {
      * @return: java.lang.String
      **/
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpSession session) {
+        session.removeAttribute("loginShipper");
         return "login";
     }
 
