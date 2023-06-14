@@ -56,7 +56,7 @@ public interface ShipperMapper {
      * @param: [shipperId]
      * @return: com.lqyrmk.transportation.entity.Shipper
      **/
-    Shipper getOrderAndShipperAndCarrierByOrderIdByStepTwo(@Param("shipperId") Integer shipperId);
+    Shipper getOrderByOrderIdByStep2(@Param("shipperId") Long shipperId);
 
     /**
      * @description: 添加托运人信息

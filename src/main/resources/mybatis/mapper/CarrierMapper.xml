@@ -5,8 +5,8 @@
 
 <mapper namespace="com.lqyrmk.transportation.mapper.CarrierMapper">
 
-    <!--Carrier getOrderAndShipperAndCarrierByOrderIdByStepTwo(@Param("carrierId") Integer carrierId);-->
-    <select id="getOrderAndShipperAndCarrierByOrderIdByStepTwo" resultType="Carrier">
+    <!--Carrier getOrderByOrderIdByStep2(@Param("carrierId") Long carrierId);-->
+    <select id="getOrderByOrderIdByStep2" resultType="Carrier">
         select * from carrier where carrier_id = #{carrierId}
     </select>
 

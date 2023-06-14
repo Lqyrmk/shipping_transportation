@@ -1,5 +1,6 @@
 package com.lqyrmk.transportation.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lqyrmk.transportation.entity.Order;
 import com.lqyrmk.transportation.entity.Shipper;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +14,7 @@ import java.util.List;
  * @Date 2023/4/29 16:29
  */
 @Mapper
-public interface OrderMapper {
+public interface OrderMapper extends BaseMapper<Order> {
 
     /**
      * @description: 查询所有的订单
@@ -34,22 +35,13 @@ public interface OrderMapper {
     List<Order> getOrdersByInfo(@Param("keywords") String keywords);
 
     /**
-     * @description: 根据订单id查询订单信息
-     * @author: YuanmingLiu
-     * @date: 2023/4/29 17:40
-     * @param: [orderId]
-     * @return: com.lqyrmk.transportation.entity.Order
-     **/
-    Order getOrderById(@Param("orderId") Integer orderId);
-
-    /**
      * @description: 根据订单id查询订单详细信息 第一步
      * @author: YuanmingLiu
      * @date: 2023/4/29 21:35
      * @param: [orderId]
      * @return: com.lqyrmk.transportation.entity.Order
      **/
-    Order getOrderAndShipperAndCarrierByOrderIdByStepOne(@Param("orderId") Integer orderId);
+    Order getOrderByOrderIdByStep1(@Param("orderId") Long orderId);
 
     /**
      * @description: 根据托运人id查询托运人信息 第二步（order）
@@ -65,35 +57,35 @@ public interface OrderMapper {
      * @author: YuanmingLiu
      * @date: 2023/4/29 16:39
      * @param: [order]
-     * @return: void
+     * @return: int
      **/
-    void insertOrder(Order order);
+    int addOrder(Order order);
 
     /**
      * @description: 修改订单信息
      * @author: YuanmingLiu
      * @date: 2023/4/29 17:45
      * @param: [order]
-     * @return: void
+     * @return: int
      **/
-    void updateOrder(Order order);
+    int updateOrderById(Order order);
 
     /**
      * @description: 删除订单
      * @author: YuanmingLiu
      * @date: 2023/4/29 18:20
      * @param: [orderId]
-     * @return: void
+     * @return: int
      **/
-    void deleteOrder(@Param("orderId") Integer orderId);
+    int deleteOrderById(@Param("orderId") Long orderId);
 
     /**
      * @description: 更新订单中的总价和总重
      * @author: YuanmingLiu
      * @date: 2023/4/29 19:58
      * @param: [order]
-     * @return: void
+     * @return: int
      **/
-    void updateOrderPriceAndWeight(Order order);
+    int updateOrderPriceAndWeight(Order order);
 
 }

@@ -1,45 +1,51 @@
 package com.lqyrmk.transportation.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.lqyrmk.transportation.common.Result;
 import com.lqyrmk.transportation.entity.Goods;
-import com.lqyrmk.transportation.service.GoodsListService;
 import com.lqyrmk.transportation.service.GoodsService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @Description 货物控制层
+ * @Description
  * @Author YuanmingLiu
  * @Date 2023/4/29 0:20
  */
+@Api(tags = "货物接口")
 @Slf4j
-@Controller
+@RestController
+@RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
 
     /**
-     * @description: 获取所有的货物信息
+     * @description: 根据id查询货物信息
      * @author: YuanmingLiu
      * @date: 2023/4/30 22:11
-     * @param: [model]
-     * @return: java.lang.String
+     * @param: [goodsId]
+     * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Goods>
      **/
-    @GetMapping("/getGoodsInfo")
-    public String getGoodsInfo(Model model) {
+    @GetMapping("/{goodsId}")
+    @ApiOperation("根据id查询货物信息")
+    @ApiImplicitParams({
+    })
+    public Result<Goods> getGoodsById(@PathVariable("goodsId") Long goodsId) {
         // 获取所有的货物信息
-        List<Goods> allGoods = goodsService.getAllGoods();
-        // 将所有的货物信息在请求域中共享
-        model.addAttribute("allGoods", allGoods);
-        // 跳转到货物列表页面
-        return "goods/goods_info";
+        Goods goods = goodsService.getById(goodsId);
+        if (goods != null) {
+            return Result.success(goods, "查询成功！");
+        }
+        return Result.error("没有此货物！");
     }
 
     /**
@@ -47,49 +53,31 @@ public class GoodsController {
      * @author: YuanmingLiu
      * @date: 2023/4/30 22:11
      * @param: [priceMin, priceMax, weightMin, weightMax, stockMin, stockMax, keywords, model]
-     * @return: java.lang.String
+     * @return: com.lqyrmk.transportation.common.Result<java.util.List<com.lqyrmk.transportation.entity.Goods>>
      **/
-    @PostMapping("/getGoodsByInfo")
-    public String getGoodsByInfo(@RequestParam("priceMin") String priceMin,
-                                 @RequestParam("priceMax") String priceMax,
-                                 @RequestParam("weightMin") String weightMin,
-                                 @RequestParam("weightMax") String weightMax,
-                                 @RequestParam("stockMin") String stockMin,
-                                 @RequestParam("stockMax") String stockMax,
-                                 @RequestParam("keywords") String keywords,
-                                 Model model) {
-        Map<String, Object> infoMap = new HashMap<>();
-        infoMap.put("priceMin", priceMin);
-        infoMap.put("priceMax", priceMax);
-        infoMap.put("weightMin", weightMin);
-        infoMap.put("weightMax", weightMax);
-        infoMap.put("stockMin", stockMin);
-        infoMap.put("stockMax", stockMax);
-        infoMap.put("keywords", keywords);
-        List<Goods> allGoods = goodsService.getGoodsByInfo(infoMap);
-//        System.out.println(allGoods);
-        model.addAttribute("allGoods", allGoods);
-        model.addAttribute("priceMin", priceMin);
-        model.addAttribute("priceMax", priceMax);
-        model.addAttribute("weightMin", weightMin);
-        model.addAttribute("weightMax", weightMax);
-        model.addAttribute("stockMin", stockMin);
-        model.addAttribute("stockMax", stockMax);
-        model.addAttribute("keywords", keywords);
-        return "goods/goods_info";
-    }
+    @GetMapping
+    @ApiOperation("根据关键信息查询货物")
+    @ApiImplicitParams({
+    })
+    public Result<List<Goods>> getGoodsByInfo(@RequestParam(value = "priceMin", required = false) Double priceMin,
+                                              @RequestParam(value = "priceMax", required = false) Double priceMax,
+                                              @RequestParam(value = "weightMin", required = false) Double weightMin,
+                                              @RequestParam(value = "weightMax", required = false) Double weightMax,
+                                              @RequestParam(value = "stockMin", required = false) Integer stockMin,
+                                              @RequestParam(value = "stockMax", required = false) Integer stockMax,
+                                              @RequestParam("keywords") String keywords) {
+        // 查询条件组装
+        LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(keywords), Goods::getGoodsName, keywords)
+                .ge(priceMin != null, Goods::getPrice, priceMin)
+                .le(priceMax != null, Goods::getPrice, priceMax)
+                .ge(weightMin != null, Goods::getWeight, weightMin)
+                .le(weightMax != null, Goods::getWeight, weightMax)
+                .ge(stockMin != null, Goods::getStock, stockMin)
+                .le(stockMax != null, Goods::getStock, stockMax);
+        List<Goods> goods = goodsService.list(queryWrapper);
+        return Result.success(goods, "查询成功！");
 
-    /**
-     * @description: 跳转到添加货物页面
-     * @author: YuanmingLiu
-     * @date: 2023/4/30 22:12
-     * @param: [model]
-     * @return: java.lang.String
-     **/
-    @GetMapping("/toAddGoods")
-    public String toAddGoods(Model model) {
-        // 跳转到添加货物页面
-        return "goods/goods_add";
     }
 
     /**
@@ -97,31 +85,16 @@ public class GoodsController {
      * @author: YuanmingLiu
      * @date: 2023/4/30 22:12
      * @param: [goods]
-     * @return: java.lang.String
+     * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Goods>
      **/
-    @PostMapping("/addGoods")
-    public String addGoods(Goods goods) {
+    @PostMapping
+    public Result<Goods> addGoods(@RequestBody Goods goods) {
         //保存货物信息
-        goodsService.saveGoods(goods);
-        // 跳转到货物列表页面
-        return "redirect:/getGoodsInfo";
-    }
-
-    /**
-     * @description: 跳转到更新货物页面
-     * @author: YuanmingLiu
-     * @date: 2023/4/30 22:12
-     * @param: [goodsId, model]
-     * @return: java.lang.String
-     **/
-    @GetMapping("/toUpdateGoods")
-    public String toUpdateGoods(@RequestParam("goodsId") Integer goodsId, Model model) {
-        // 根据id查询货物信息
-        Goods goods = goodsService.getGoodsById(goodsId);
-        //根据货物信息共享到请求域中
-        model.addAttribute("goods", goods);
-        // 跳转到更新货物页面
-        return "goods/goods_update";
+        boolean save = goodsService.save(goods);
+        if (save) {
+            return Result.success(goods, "添加成功！");
+        }
+        return Result.error("添加失败！");
     }
 
     /**
@@ -129,13 +102,16 @@ public class GoodsController {
      * @author: YuanmingLiu
      * @date: 2023/4/30 22:12
      * @param: [goods]
-     * @return: java.lang.String
+     * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Goods>
      **/
-    @PostMapping("/updateGoods")
-    public String updateGoods(Goods goods) {
-        // 根据id修改货物信息
-        goodsService.updateGoods(goods);
-        return "redirect:/getGoodsInfo";
+    @PutMapping
+    public Result<Goods> updateGoods(@RequestBody Goods goods) {
+        //保存货物信息
+        boolean update = goodsService.updateById(goods);
+        if (update) {
+            return Result.success(goods, "更新成功！");
+        }
+        return Result.error("更新失败！");
     }
 
     /**
@@ -145,11 +121,14 @@ public class GoodsController {
      * @param: [goodsId]
      * @return: java.lang.String
      **/
-    @GetMapping("/deleteGoods/{goodsId}")
-    public String deleteGoods(@PathVariable("goodsId") Integer goodsId) {
+    @DeleteMapping("/{goodsId}")
+    public Result<String> deleteGoods(@PathVariable("goodsId") Long goodsId) {
         // 根据id删除货物
-        goodsService.deleteGoods(goodsId);
-        return "redirect:/getGoodsInfo";
+        boolean b = goodsService.removeById(goodsId);
+        if (b) {
+            return Result.success("删除成功！");
+        }
+        return Result.error("删除失败！");
     }
 
 

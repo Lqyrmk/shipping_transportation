@@ -5,7 +5,7 @@
 
 <mapper namespace="com.lqyrmk.transportation.mapper.OrderMapper">
 
-    <resultMap id="orderAndShipperAndCarrierByStepResultMap" type="Order">
+    <resultMap id="orderByStepResultMap" type="Order">
         <id column="order_id" property="orderId"></id>
         <result column="shipment_place" property="shipmentPlace"></result>
         <result column="consignee" property="consignee"></result>
@@ -13,13 +13,15 @@
         <result column="destination" property="destination"></result>
         <result column="total_price" property="totalPrice"></result>
         <result column="total_weight" property="totalWeight"></result>
+        <result column="shipper_id" property="shipperId"></result>
+        <result column="carrier_id" property="carrierId"></result>
         <!--处理shipper字段-->
         <association property="shipper" fetchType="eager"
-                     select="com.lqyrmk.transportation.mapper.ShipperMapper.getOrderAndShipperAndCarrierByOrderIdByStepTwo"
+                     select="com.lqyrmk.transportation.mapper.ShipperMapper.getOrderByOrderIdByStep2"
                      column="shipper_id"></association>
         <!--处理carrier字段-->
         <association property="carrier" fetchType="eager"
-                     select="com.lqyrmk.transportation.mapper.CarrierMapper.getOrderAndShipperAndCarrierByOrderIdByStepTwo"
+                     select="com.lqyrmk.transportation.mapper.CarrierMapper.getOrderByOrderIdByStep2"
                      column="carrier_id"></association>
         <!--处理orderDetailsList字段-->
         <collection property="orderDetailsList" fetchType="eager"
@@ -28,61 +30,48 @@
     </resultMap>
 
     <!--List<Order> getAllOrders();-->
-    <select id="getAllOrders"
-            resultMap="orderAndShipperAndCarrierByStepResultMap">
+    <select id="getAllOrders" resultMap="orderByStepResultMap">
         select * from `order`
     </select>
 
     <!--List<Order> getOrdersByInfo(@Param("keywords") String keywords);-->
-    <select id="getOrdersByInfo"
-            resultMap="orderAndShipperAndCarrierByStepResultMap">
+    <select id="getOrdersByInfo" resultMap="orderByStepResultMap">
         select *
         from `order`
-        left join `shipper`
-            on `order`.shipper_id = `shipper`.shipper_id
-        left join `carrier`
-            on `order`.carrier_id = `carrier`.carrier_id
         where `shipment_place` like '%${keywords}%'
            or `consignee` like '%${keywords}%'
            or `destination` like '%${keywords}%'
-           or `shipper_name` like '%${keywords}%'
-           or `carrier_name` like '%${keywords}%'
+           or shipper_id in (select shipper_id from `shipper` where `shipper_name` like '%${keywords}%')
+           or carrier_id in (select carrier_id from `carrier` where `carrier_name` like '%${keywords}%')
     </select>
 
-    <!--Order getOrderById(@Param("orderId") Integer orderId);-->
-    <select id="getOrderById" resultType="Order">
+    <!--Order getOrderByOrderIdByStep1(@Param("orderId") Integer orderId);-->
+    <select id="getOrderByOrderIdByStep1" resultMap="orderByStepResultMap">
         select * from `order` where order_id = #{orderId}
     </select>
 
-    <!--Order getOrderAndShipperAndCarrierByOrderIdByStepOne(@Param("orderId") Integer orderId);-->
-    <select id="getOrderAndShipperAndCarrierByOrderIdByStepOne"
-            resultMap="orderAndShipperAndCarrierByStepResultMap">
-        select * from `order` where order_id = #{orderId}
-    </select>
+<!--    &lt;!&ndash;List<Order> getShipperAndOrderByShipperIdByStepTwo(@Param("shipperId") Integer shipperId);&ndash;&gt;-->
+<!--    <select id="getShipperAndOrderByShipperIdByStepTwo" resultType="Order">-->
+<!--        select * from `order` where shipper_id = #{shipperId}-->
+<!--    </select>-->
 
-    <!--List<Order> getShipperAndOrderByShipperIdByStepTwo(@Param("shipperId") Integer shipperId);-->
-    <select id="getShipperAndOrderByShipperIdByStepTwo" resultType="Order">
-        select * from `order` where shipper_id = #{shipperId}
-    </select>
-
-
-    <!--void insertOrder(Order order);-->
-    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="orderId">
+    <!--void addOrder(Order order);-->
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="orderId">
         insert into `order`(`order_id`, `shipper_id`, `carrier_id`, `shipment_place`, `consignee`, `consignee_phone`, `destination`, `total_weight`, `total_price`)
-        values (#{orderId}, #{shipper.shipperId}, #{carrier.carrierId}, #{shipmentPlace}, #{consignee}, #{consigneePhone}, #{destination}, #{totalWeight}, #{totalPrice})
+        values (#{orderId}, #{shipperId}, #{carrierId}, #{shipmentPlace}, #{consignee}, #{consigneePhone}, #{destination}, #{totalWeight}, #{totalPrice})
     </insert>
 
-    <!--void updateOrder(Order order);-->
-    <update id="updateOrder">
+    <!--void updateOrderById(Order order);-->
+    <update id="updateOrderById">
         update `order`
-        set `shipper_id`=#{shipper.shipperId}, `carrier_id`=#{carrier.carrierId}, `shipment_place`=#{shipmentPlace},
+        set `shipper_id`=#{shipperId}, `carrier_id`=#{carrierId}, `shipment_place`=#{shipmentPlace},
             `consignee`=#{consignee}, `consignee_phone`=#{consigneePhone}, `destination`=#{destination},
             `total_weight`=#{totalWeight}, `total_price`=#{totalPrice}, `state`=#{state}
         where `order_id`=#{orderId}
     </update>
 
-    <!--void deleteOrder(@Param("orderId") Integer orderId);-->
-    <delete id="deleteOrder">
+    <!--void deleteOrderById(@Param("orderId") Long orderId);-->
+    <delete id="deleteOrderById">
         delete from `order` where order_id=#{orderId}
     </delete>
 

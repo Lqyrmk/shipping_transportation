@@ -5,34 +5,33 @@
 
 <mapper namespace="com.lqyrmk.transportation.mapper.OrderDetailsMapper">
 
-    <resultMap id="orderDetailsByStepResultMap" type="OrderDetails">
-        <id column="id" property="id"></id>
-        <result column="goods_num" property="goodsNum"></result>
-        <!--处理order字段-->
-<!--        <association property="order" fetchType="eager"-->
-<!--                     select="com.lqyrmk.transportation.mapper.OrderMapper.getOrderById"-->
-<!--                     column="order_id"></association>-->
-        <!--处理goods字段-->
-        <association property="goods" fetchType="eager"
-                     select="com.lqyrmk.transportation.mapper.GoodsMapper.getGoodsById"
-                     column="goods_id"></association>
-    </resultMap>
+<!--    <resultMap id="orderDetailsByStepResultMap" type="OrderDetails">-->
+<!--        <id column="id" property="id"></id>-->
+<!--        <result column="goods_num" property="goodsNum"></result>-->
+<!--        &lt;!&ndash;处理order字段&ndash;&gt;-->
+<!--&lt;!&ndash;        <association property="order" fetchType="eager"&ndash;&gt;-->
+<!--&lt;!&ndash;                     select="com.lqyrmk.transportation.mapper.OrderMapper.getOrderById"&ndash;&gt;-->
+<!--&lt;!&ndash;                     column="order_id"></association>&ndash;&gt;-->
+<!--        &lt;!&ndash;处理goods字段&ndash;&gt;-->
+<!--        <association property="goods" fetchType="eager"-->
+<!--                     select="com.lqyrmk.transportation.mapper.GoodsMapper.getGoodsById"-->
+<!--                     column="goods_id"></association>-->
+<!--    </resultMap>-->
 
-    <!--List<OrderDetails> getOrderDetailsByOrderId(@Param("orderId") Integer orderId);-->
-    <select id="getOrderDetailsByOrderId" resultMap="orderDetailsByStepResultMap">
+    <!--List<OrderDetails> getOrderDetailsByOrderId(@Param("orderId") Long orderId);-->
+    <select id="getOrderDetailsByOrderId" resultType="OrderDetails">
         select * from order_details where order_id = #{orderId}
     </select>
 
+<!--    &lt;!&ndash;void insertOrderDetails(@Param("order") Order order, @Param("goodsList") GoodsList goodsList);&ndash;&gt;-->
+<!--    <insert id="insertOrderDetails">-->
+<!--        insert into order_details (`order_id`, `goods_id`, `goods_name`, `goods_num`)-->
+<!--        values (#{order.orderId}, #{goodsList.goodsId}, #{goodsList.goodsName}, #{goodsList.num})-->
+<!--    </insert>-->
 
-    <!--void insertOrderDetails(@Param("order") Order order, @Param("goodsList") GoodsList goodsList);-->
-    <insert id="insertOrderDetails">
-        insert into order_details (`order_id`, `goods_id`, `goods_name`, `goods_num`)
-        values (#{order.orderId}, #{goodsList.goodsId}, #{goodsList.goodsName}, #{goodsList.num})
-    </insert>
-
-    <!--void deleteOrderDetails(@Param("orderId") Integer orderId);-->
-    <delete id="deleteOrderDetails">
-        delete from order_details where order_id = #{orderId}
-    </delete>
+<!--    &lt;!&ndash;void deleteOrderDetails(@Param("orderId") Integer orderId);&ndash;&gt;-->
+<!--    <delete id="deleteOrderDetails">-->
+<!--        delete from order_details where order_id = #{orderId}-->
+<!--    </delete>-->
 
 </mapper>

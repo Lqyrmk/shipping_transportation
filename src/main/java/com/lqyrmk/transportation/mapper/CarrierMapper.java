@@ -20,6 +20,6 @@ public interface CarrierMapper {
      * @param: [carrierId]
      * @return: com.lqyrmk.transportation.entity.Carrier
      **/
-    Carrier getOrderAndShipperAndCarrierByOrderIdByStepTwo(@Param("carrierId") Integer carrierId);
+    Carrier getOrderByOrderIdByStep2(@Param("carrierId") Long carrierId);
 
 }

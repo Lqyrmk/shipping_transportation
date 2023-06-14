@@ -1,5 +1,6 @@
 package com.lqyrmk.transportation.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lqyrmk.transportation.entity.Goods;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @Date 2023/4/29 0:34
  */
 @Mapper
-public interface GoodsMapper {
+public interface GoodsMapper extends BaseMapper<Goods> {
 
     /**
      * @description: 查询所有的货物
