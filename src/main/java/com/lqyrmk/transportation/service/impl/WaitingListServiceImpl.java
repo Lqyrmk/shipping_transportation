@@ -65,9 +65,10 @@ public class WaitingListServiceImpl extends ServiceImpl<WaitingListMapper, Waiti
             waitingListMapper.insert(waitingList);
         }
 
-        // 根据用户id查询货物清单项
+        // 根据用户id和货物id查询货物清单项
         LambdaQueryWrapper<WaitingItem> waitingItemLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        waitingItemLambdaQueryWrapper.eq(WaitingItem::getUserId, userId);
+        waitingItemLambdaQueryWrapper.eq(WaitingItem::getUserId, userId)
+                .eq(WaitingItem::getGoodsId, goods.getGoodsId());
         WaitingItem waitingItem = waitingItemMapper.selectOne(waitingItemLambdaQueryWrapper);
 
         if (waitingItem != null) {

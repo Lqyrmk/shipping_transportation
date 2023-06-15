@@ -1,5 +1,6 @@
 package com.lqyrmk.transportation.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lqyrmk.transportation.entity.Shipper;
 import com.lqyrmk.transportation.mapper.ShipperMapper;
 import com.lqyrmk.transportation.service.ShipperService;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @Date 2023/4/28 1:11
  */
 @Service
-public class ShipperServiceImpl implements ShipperService {
+public class ShipperServiceImpl extends ServiceImpl<ShipperMapper, Shipper> implements ShipperService {
 
     @Autowired
     private ShipperMapper shipperMapper;

@@ -1,5 +1,6 @@
 package com.lqyrmk.transportation.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lqyrmk.transportation.entity.Shipper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -10,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  * @Date 2023/4/28 1:11
  */
 @Mapper
-public interface ShipperMapper {
+public interface ShipperMapper extends BaseMapper<Shipper> {
 
     /**
      * @description: 根据用户名和密码查询托运人

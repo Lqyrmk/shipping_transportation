@@ -1,5 +1,6 @@
 package com.lqyrmk.transportation.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.lqyrmk.transportation.entity.Shipper;
 
 /**
@@ -7,7 +8,7 @@ import com.lqyrmk.transportation.entity.Shipper;
  * @Author YuanmingLiu
  * @Date 2023/4/28 1:11
  */
-public interface ShipperService {
+public interface ShipperService extends IService<Shipper> {
 
     /**
      * @description: 用户登录
