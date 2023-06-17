@@ -3,6 +3,7 @@ package com.lqyrmk.transportation.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lqyrmk.transportation.entity.Goods;
+import com.lqyrmk.transportation.entity.LoginUser;
 import com.lqyrmk.transportation.entity.WaitingItem;
 import com.lqyrmk.transportation.entity.WaitingList;
 import com.lqyrmk.transportation.mapper.WaitingItemMapper;
@@ -10,6 +11,8 @@ import com.lqyrmk.transportation.mapper.WaitingListMapper;
 import com.lqyrmk.transportation.mapper.GoodsMapper;
 import com.lqyrmk.transportation.service.WaitingListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +36,13 @@ public class WaitingListServiceImpl extends ServiceImpl<WaitingListMapper, Waiti
 
     @Override
     public WaitingList getWaitingList() {
-        return waitingListMapper.seleteWaitingListByStep1(14L);
+
+        // 获取SecurityContextHolder中的用户id
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userId = loginUser.getUser().getUserId();
+
+        return waitingListMapper.seleteWaitingListByStep1(userId);
     }
 
     @Override
@@ -48,7 +57,11 @@ public class WaitingListServiceImpl extends ServiceImpl<WaitingListMapper, Waiti
         goods.setStock(goods.getStock() - 1);
         goodsMapper.updateById(goods);
 
-        Long userId = 14L;
+        // 获取SecurityContextHolder中的用户id
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userId = loginUser.getUser().getUserId();
+
         // 根据用户id查询清单
         LambdaQueryWrapper<WaitingList> waitingListLambdaQueryWrapper = new LambdaQueryWrapper<>();
         waitingListLambdaQueryWrapper.eq(WaitingList::getUserId, userId);
@@ -86,7 +99,10 @@ public class WaitingListServiceImpl extends ServiceImpl<WaitingListMapper, Waiti
     @Override
     public int updateWaitingList(WaitingItem waitingItem) {
 
-        Long userId = 14L;
+        // 获取SecurityContextHolder中的用户id
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userId = loginUser.getUser().getUserId();
 
         // 原来的货物清单项
         WaitingItem oldWaitingItem = waitingItemMapper.selectById(waitingItem.getWaitingId());
@@ -141,7 +157,10 @@ public class WaitingListServiceImpl extends ServiceImpl<WaitingListMapper, Waiti
     @Override
     public int deleteWaitingItem(Long waitingId) {
 
-        Long userId = 14L;
+        // 获取SecurityContextHolder中的用户id
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userId = loginUser.getUser().getUserId();
 
         // 根据用户id查询货物清单项
         LambdaQueryWrapper<WaitingItem> waitingItemLambdaQueryWrapper = new LambdaQueryWrapper<>();

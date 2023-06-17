@@ -32,7 +32,16 @@ public interface OrderMapper extends BaseMapper<Order> {
      * @param: [keywords]
      * @return: java.util.List<com.lqyrmk.transportation.entity.Order>
      **/
-    List<Order> getOrdersByInfo(@Param("keywords") String keywords);
+    List<Order> getOrdersByInfoByCarrier(@Param("keywords") String keywords);
+
+    /**
+     * @description: 根据信息
+     * @author: YuanmingLiu
+     * @date: 2023/4/30 16:30
+     * @param: [keywords]
+     * @return: java.util.List<com.lqyrmk.transportation.entity.Order>
+     **/
+    List<Order> getOrdersByInfoByShipper(@Param("keywords") String keywords, @Param("userId") Long userId);
 
     /**
      * @description: 根据订单id查询订单详细信息 第一步

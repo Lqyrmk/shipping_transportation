@@ -3,6 +3,7 @@ package com.lqyrmk.transportation.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.lqyrmk.transportation.common.Result;
 import com.lqyrmk.transportation.entity.Goods;
+import com.lqyrmk.transportation.entity.LoginUser;
 import com.lqyrmk.transportation.entity.WaitingItem;
 import com.lqyrmk.transportation.service.WaitingItemService;
 import io.swagger.annotations.Api;
@@ -10,6 +11,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +40,7 @@ public class WaitingItemController {
      * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.WaitingItem>
      **/
     @GetMapping("/{waitingId}")
+    @PreAuthorize("hasAuthority('system:use')")
     @ApiOperation("根据id查询货物清单项信息")
     @ApiImplicitParams({
     })
@@ -56,12 +61,16 @@ public class WaitingItemController {
      * @return: com.lqyrmk.transportation.common.Result<java.util.List<com.lqyrmk.transportation.entity.WaitingItem>>
      **/
     @GetMapping
+    @PreAuthorize("hasAuthority('system:use')")
     @ApiOperation("查询所有货物清单项")
     @ApiImplicitParams({
     })
     public Result<List<WaitingItem>> getWaitingItems() {
 
-        Long userId = 14L;
+        // 获取SecurityContextHolder中的用户id
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userId = loginUser.getUser().getUserId();
 
         LambdaQueryWrapper<WaitingItem> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(WaitingItem::getUserId, userId);

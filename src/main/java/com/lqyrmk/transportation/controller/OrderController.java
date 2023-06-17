@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,7 @@ public class OrderController {
      * @return: com.lqyrmk.transportation.common.Result<java.util.List<com.lqyrmk.transportation.entity.Order>>
      **/
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('system:use', 'system:manage')")
     @ApiOperation("根据关键词查询订单信息")
     @ApiImplicitParams({
     })
@@ -82,6 +84,7 @@ public class OrderController {
      * @return: com.lqyrmk.transportation.common.Result<java.util.Map<java.lang.String,java.lang.Object>>
      **/
     @GetMapping("/{orderId}")
+    @PreAuthorize("hasAnyAuthority('system:use', 'system:manage')")
     @ApiOperation("格式化获取订单货物细节")
     @ApiImplicitParams({
     })
@@ -107,6 +110,7 @@ public class OrderController {
      * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Order>
      **/
     @PostMapping
+    @PreAuthorize("hasAuthority('system:use')")
     @ApiOperation("添加订单")
     @ApiImplicitParams({
     })
@@ -126,6 +130,7 @@ public class OrderController {
      * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Order>
      **/
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('system:use', 'system:manage')")
     @ApiOperation("更新订单")
     @ApiImplicitParams({
     })
@@ -145,6 +150,7 @@ public class OrderController {
      * @return: com.lqyrmk.transportation.common.Result<java.lang.String>
      **/
     @DeleteMapping("/{orderId}")
+    @PreAuthorize("hasAnyAuthority('system:use', 'system:manage')")
     @ApiOperation("根据id删除订单")
     @ApiImplicitParams({
     })

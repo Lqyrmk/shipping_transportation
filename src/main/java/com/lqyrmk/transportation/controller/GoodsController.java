@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class GoodsController {
      * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Goods>
      **/
     @GetMapping("/{goodsId}")
+    @PreAuthorize("hasAuthority('system:use')")
     @ApiOperation("根据id查询货物信息")
     @ApiImplicitParams({
     })
@@ -56,6 +58,7 @@ public class GoodsController {
      * @return: com.lqyrmk.transportation.common.Result<java.util.List<com.lqyrmk.transportation.entity.Goods>>
      **/
     @GetMapping
+    @PreAuthorize("hasAuthority('system:use')")
     @ApiOperation("根据关键信息查询货物")
     @ApiImplicitParams({
     })
@@ -88,6 +91,10 @@ public class GoodsController {
      * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Goods>
      **/
     @PostMapping
+    @PreAuthorize("hasAuthority('system:use')")
+    @ApiOperation("添加货物")
+    @ApiImplicitParams({
+    })
     public Result<Goods> addGoods(@RequestBody Goods goods) {
         //保存货物信息
         boolean save = goodsService.save(goods);
@@ -105,6 +112,10 @@ public class GoodsController {
      * @return: com.lqyrmk.transportation.common.Result<com.lqyrmk.transportation.entity.Goods>
      **/
     @PutMapping
+    @PreAuthorize("hasAuthority('system:use')")
+    @ApiOperation("更新货物")
+    @ApiImplicitParams({
+    })
     public Result<Goods> updateGoods(@RequestBody Goods goods) {
         //保存货物信息
         boolean update = goodsService.updateById(goods);
@@ -122,6 +133,10 @@ public class GoodsController {
      * @return: java.lang.String
      **/
     @DeleteMapping("/{goodsId}")
+    @PreAuthorize("hasAuthority('system:use')")
+    @ApiOperation("删除货物")
+    @ApiImplicitParams({
+    })
     public Result<String> deleteGoods(@PathVariable("goodsId") Long goodsId) {
         // 根据id删除货物
         boolean b = goodsService.removeById(goodsId);

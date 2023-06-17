@@ -34,15 +34,30 @@
         select * from `order`
     </select>
 
-    <!--List<Order> getOrdersByInfo(@Param("keywords") String keywords);-->
-    <select id="getOrdersByInfo" resultMap="orderByStepResultMap">
+    <!--List<Order> getOrdersByInfoByCarrier(@Param("keywords") String keywords);-->
+    <select id="getOrdersByInfoByCarrier" resultMap="orderByStepResultMap">
         select *
         from `order`
         where `shipment_place` like '%${keywords}%'
-           or `consignee` like '%${keywords}%'
-           or `destination` like '%${keywords}%'
-           or shipper_id in (select shipper_id from `shipper` where `shipper_name` like '%${keywords}%')
-           or carrier_id in (select carrier_id from `carrier` where `carrier_name` like '%${keywords}%')
+            or `consignee` like '%${keywords}%'
+            or `destination` like '%${keywords}%'
+            or shipper_id in (select shipper_id from `shipper` where `shipper_name` like '%${keywords}%')
+            or carrier_id in (select carrier_id from `carrier` where `carrier_name` like '%${keywords}%')
+    </select>
+
+    <!--List<Order> getOrdersByInfoByShipper(@Param("keywords") String keywords, @Param("userId") Long userId);-->
+    <select id="getOrdersByInfoByShipper" resultMap="orderByStepResultMap">
+        select *
+        from `order`
+        where
+        (
+            `shipment_place` like '%${keywords}%'
+            or `consignee` like '%${keywords}%'
+            or `destination` like '%${keywords}%'
+            or shipper_id in (select shipper_id from `shipper` where `shipper_name` like '%${keywords}%')
+            or carrier_id in (select carrier_id from `carrier` where `carrier_name` like '%${keywords}%')
+        )
+        and shipper_id = #{userId}
     </select>
 
     <!--Order getOrderByOrderIdByStep1(@Param("orderId") Integer orderId);-->
