@@ -8,12 +8,11 @@
 
 * [x] Assignment 2：Re-design of assignment1 with REST API and More
 
-* [ ] Assignment 3：A shipping and transportation services development with Micro-services Architecture and Spring-Cloud
+* [x] Assignment 3：A shipping and transportation services development with Micro-services Architecture and Spring-Cloud
 
-* [ ] Assignment 4：Event-notification for microservices
+* [x] Assignment 4：Event-notification for microservices
 
 ---
 
-> The following files will be stored in the git repository's project directory:
-> * The running and testing screen capture;
-> * The system design document.
+> The following files will be stored in the project directoryof master branch:
+> * The system design document (contains the running screen capture).
